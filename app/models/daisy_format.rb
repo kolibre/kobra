@@ -1,0 +1,2 @@
+class DaisyFormat < ApplicationRecord
+end
