@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  content: one
+  contentlist: one
+  return: 
+  returned: 
+  return_at: 
+  state: one
+
+two:
+  user: two
+  content: two
+  contentlist: two
+  return: 
+  returned: 
+  return_at: 
+  state: two
