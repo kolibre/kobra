@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_bookmarks
   resources :contents
   resources :daisy_formats
   resources :categories
