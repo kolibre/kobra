@@ -1,7 +1,7 @@
 class CreateAnnouncementAudios < ActiveRecord::Migration[5.2]
   def change
     create_table :announcement_audios do |t|
-      t.reference :announcementtext
+      t.references :announcementtext
       t.int :size, null: false
       t.int :length, null: false
 
