@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :categories
   resources :user_announcements
   resources :users
   resources :announcement_audios
