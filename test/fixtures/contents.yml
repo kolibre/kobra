@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category: one
+  daisyformat: one
+  title: MyText
+  date: 
+
+two:
+  category: two
+  daisyformat: two
+  title: MyText
+  date: 

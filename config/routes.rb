@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :contents
   resources :daisy_formats
   resources :categories
   resources :user_announcements
