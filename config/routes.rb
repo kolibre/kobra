@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :states
   resources :content_lists
   resources :user_bookmarks
   resources :contents
