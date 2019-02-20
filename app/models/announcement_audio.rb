@@ -1,0 +1,2 @@
+class AnnouncementAudio < ApplicationRecord
+end

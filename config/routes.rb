@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :announcement_audios
   resources :announcement_texts
   resources :languages
   resources :announcements

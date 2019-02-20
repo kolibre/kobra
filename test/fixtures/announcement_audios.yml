@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  announcementtext: 
+  size: 
+  length: 
+
+two:
+  announcementtext: 
+  size: 
+  length: 
