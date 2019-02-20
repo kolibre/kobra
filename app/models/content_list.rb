@@ -1,0 +1,2 @@
+class ContentList < ApplicationRecord
+end
