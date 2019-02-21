@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content: one
+  filename: MyText
+  bytes: 1
+  mimetype: MyText
+
+two:
+  content: two
+  filename: MyText
+  bytes: 1
+  mimetype: MyText

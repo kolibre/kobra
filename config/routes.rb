@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :content_resources
   resources :content_metadata
   resources :content_audios
   resources :user_contents
