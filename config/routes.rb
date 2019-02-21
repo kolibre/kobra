@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :content_audios
   resources :user_contents
   resources :states
   resources :content_lists

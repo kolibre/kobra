@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_20_190600) do
+ActiveRecord::Schema.define(version: 2019_02_21_164321) do
 
   create_table "announcement_audios", force: :cascade do |t|
     t.integer "announcementtext_id"
@@ -42,6 +42,15 @@ ActiveRecord::Schema.define(version: 2019_02_20_190600) do
     t.text "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "content_audios", force: :cascade do |t|
+    t.integer "content_id"
+    t.integer "size"
+    t.integer "length"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_id"], name: "index_content_audios_on_content_id"
   end
 
   create_table "content_lists", force: :cascade do |t|
