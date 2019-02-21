@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  question: one
+  allow_multiple_selections: 1
+  text_numeric: 1
+  text_alphanumeric: 1
+  audio: 1
+  default_value: MyText
+
+two:
+  question: two
+  allow_multiple_selections: 1
+  text_numeric: 1
+  text_alphanumeric: 1
+  audio: 1
+  default_value: MyText
