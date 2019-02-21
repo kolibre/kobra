@@ -4,7 +4,7 @@ class CreateUserBookmarks < ActiveRecord::Migration[5.2]
       t.references :user, foreign_key: true
       # content is not a foreign key in the KADOS example database. A mistake perhaps?
       t.references :content, foreign_key: true
-      t.text :bookmarkset, null: false
+      t.text :bookmark_set, null: false
 
       t.timestamps
     end

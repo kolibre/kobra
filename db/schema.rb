@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_21_164321) do
+ActiveRecord::Schema.define(version: 2019_02_21_173404) do
 
   create_table "announcement_audios", force: :cascade do |t|
-    t.integer "announcementtext_id"
+    t.integer "announcement_text_id"
     t.integer "size", null: false
     t.integer "length", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["announcementtext_id"], name: "index_announcement_audios_on_announcementtext_id"
+    t.index ["announcement_text_id"], name: "index_announcement_audios_on_announcement_text_id"
   end
 
   create_table "announcement_texts", force: :cascade do |t|
@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 2019_02_21_164321) do
 
   create_table "content_audios", force: :cascade do |t|
     t.integer "content_id"
-    t.integer "size"
-    t.integer "length"
+    t.integer "size", null: false
+    t.integer "length", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_content_audios_on_content_id"
@@ -59,15 +59,34 @@ ActiveRecord::Schema.define(version: 2019_02_21_164321) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "content_metadata", force: :cascade do |t|
+    t.integer "content_id"
+    t.text "key", null: false
+    t.text "value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_id"], name: "index_content_metadata_on_content_id"
+  end
+
+  create_table "content_resources", force: :cascade do |t|
+    t.integer "content_id"
+    t.text "filename", default: "", null: false
+    t.integer "bytes", default: 0, null: false
+    t.text "mimetype", default: "unknown", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_id"], name: "index_content_resources_on_content_id"
+  end
+
   create_table "contents", force: :cascade do |t|
     t.integer "category_id"
-    t.integer "daisyformat_id"
+    t.integer "daisy_format_id"
     t.text "title", null: false
     t.decimal "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_contents_on_category_id"
-    t.index ["daisyformat_id"], name: "index_contents_on_daisyformat_id"
+    t.index ["daisy_format_id"], name: "index_contents_on_daisy_format_id"
   end
 
   create_table "daisy_formats", force: :cascade do |t|
@@ -80,6 +99,21 @@ ActiveRecord::Schema.define(version: 2019_02_21_164321) do
     t.text "lang", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "question_types", force: :cascade do |t|
+    t.string "type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.integer "parent_id"
+    t.integer "question_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["parent_id"], name: "index_questions_on_parent_id"
+    t.index ["question_type_id"], name: "index_questions_on_question_type_id"
   end
 
   create_table "states", force: :cascade do |t|
@@ -100,7 +134,7 @@ ActiveRecord::Schema.define(version: 2019_02_21_164321) do
   create_table "user_bookmarks", force: :cascade do |t|
     t.integer "user_id"
     t.integer "content_id"
-    t.text "bookmarkset", null: false
+    t.text "bookmark_set", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_user_bookmarks_on_content_id"
@@ -110,8 +144,8 @@ ActiveRecord::Schema.define(version: 2019_02_21_164321) do
   create_table "user_contents", force: :cascade do |t|
     t.integer "user_id"
     t.integer "content_id"
-    t.integer "contentlist_id"
-    t.integer "contentlist_2_id", default: 3
+    t.integer "content_list_id"
+    t.integer "content_list_2_id", default: 3
     t.integer "return", null: false
     t.integer "returned", default: 0, null: false
     t.decimal "return_at"
@@ -119,8 +153,8 @@ ActiveRecord::Schema.define(version: 2019_02_21_164321) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_user_contents_on_content_id"
-    t.index ["contentlist_2_id"], name: "index_user_contents_on_contentlist_2_id"
-    t.index ["contentlist_id"], name: "index_user_contents_on_contentlist_id"
+    t.index ["content_list_2_id"], name: "index_user_contents_on_content_list_2_id"
+    t.index ["content_list_id"], name: "index_user_contents_on_content_list_id"
     t.index ["state_id"], name: "index_user_contents_on_state_id"
     t.index ["user_id"], name: "index_user_contents_on_user_id"
   end
