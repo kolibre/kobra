@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :questions
   resources :question_types
   resources :content_resources
   resources :content_metadata
