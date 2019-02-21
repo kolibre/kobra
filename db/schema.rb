@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_21_181952) do
+ActiveRecord::Schema.define(version: 2019_02_21_182750) do
 
   create_table "announcement_audios", force: :cascade do |t|
     t.integer "announcement_text_id"
@@ -99,6 +99,15 @@ ActiveRecord::Schema.define(version: 2019_02_21_181952) do
     t.text "lang", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "question_audios", force: :cascade do |t|
+    t.integer "question_text_id"
+    t.integer "size", null: false
+    t.integer "length", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_text_id"], name: "index_question_audios_on_question_text_id"
   end
 
   create_table "question_inputs", force: :cascade do |t|
