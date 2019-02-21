@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_21_173404) do
+ActiveRecord::Schema.define(version: 2019_02_21_181952) do
 
   create_table "announcement_audios", force: :cascade do |t|
     t.integer "announcement_text_id"
@@ -99,6 +99,26 @@ ActiveRecord::Schema.define(version: 2019_02_21_173404) do
     t.text "lang", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "question_inputs", force: :cascade do |t|
+    t.integer "question_id"
+    t.integer "allow_multiple_selections"
+    t.integer "text_numeric"
+    t.integer "text_alphanumeric"
+    t.integer "audio"
+    t.text "default_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_question_inputs_on_question_id"
+  end
+
+  create_table "question_texts", force: :cascade do |t|
+    t.integer "language_id"
+    t.integer "text", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["language_id"], name: "index_question_texts_on_language_id"
   end
 
   create_table "question_types", force: :cascade do |t|
