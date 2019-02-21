@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 2019_02_20_190600) do
     t.integer "user_id"
     t.integer "content_id"
     t.integer "contentlist_id"
+    t.integer "contentlist_2_id", default: 3
     t.integer "return", null: false
     t.integer "returned", default: 0, null: false
     t.decimal "return_at"
@@ -109,6 +110,7 @@ ActiveRecord::Schema.define(version: 2019_02_20_190600) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_user_contents_on_content_id"
+    t.index ["contentlist_2_id"], name: "index_user_contents_on_contentlist_2_id"
     t.index ["contentlist_id"], name: "index_user_contents_on_contentlist_id"
     t.index ["state_id"], name: "index_user_contents_on_state_id"
     t.index ["user_id"], name: "index_user_contents_on_user_id"
