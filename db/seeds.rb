@@ -6,4 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-categories = Category.create([{ name: 'BOOK' }, { name: 'MAGAZINE' }, { name: 'NEWSPAPER' }, { name: 'OTHER' }])
+categories = Category.create([{ name: 'BOOK' }, { name: 'MAGAZINE' }, 
+    { name: 'NEWSPAPER' }, { name: 'OTHER' }])
+question_types = QuestionType.create([{ type: 'multipleChoiceQuestion' }, 
+    { type: 'inputQuestion' }, { type: 'choice' }, { type: 'contentListRef' }, 
+    { type: 'label' }])
