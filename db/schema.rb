@@ -13,12 +13,12 @@
 ActiveRecord::Schema.define(version: 2019_02_21_164321) do
 
   create_table "announcement_audios", force: :cascade do |t|
-    t.integer "announcementtext_id"
+    t.integer "announcement_text_id"
     t.integer "size", null: false
     t.integer "length", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["announcementtext_id"], name: "index_announcement_audios_on_announcementtext_id"
+    t.index ["announcement_text_id"], name: "index_announcement_audios_on_announcement_text_id"
   end
 
   create_table "announcement_texts", force: :cascade do |t|
@@ -61,13 +61,12 @@ ActiveRecord::Schema.define(version: 2019_02_21_164321) do
 
   create_table "contents", force: :cascade do |t|
     t.integer "category_id"
-    t.integer "daisyformat_id"
+    t.integer "daisy_format_id"
     t.text "title", null: false
-    t.decimal "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_contents_on_category_id"
-    t.index ["daisyformat_id"], name: "index_contents_on_daisyformat_id"
+    t.index ["daisy_format_id"], name: "index_contents_on_daisy_format_id"
   end
 
   create_table "daisy_formats", force: :cascade do |t|
@@ -91,6 +90,7 @@ ActiveRecord::Schema.define(version: 2019_02_21_164321) do
   create_table "user_announcements", force: :cascade do |t|
     t.integer "user_id"
     t.integer "announcement_id"
+    t.datetime "read_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["announcement_id"], name: "index_user_announcements_on_announcement_id"
@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 2019_02_21_164321) do
   create_table "user_bookmarks", force: :cascade do |t|
     t.integer "user_id"
     t.integer "content_id"
-    t.text "bookmarkset", null: false
+    t.text "bookmark_set", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_user_bookmarks_on_content_id"
@@ -110,24 +110,24 @@ ActiveRecord::Schema.define(version: 2019_02_21_164321) do
   create_table "user_contents", force: :cascade do |t|
     t.integer "user_id"
     t.integer "content_id"
-    t.integer "contentlist_id"
-    t.integer "contentlist_2_id", default: 3
+    t.integer "content_list_id"
+    t.integer "content_list_v1_id", default: 3
     t.integer "return", null: false
     t.integer "returned", default: 0, null: false
-    t.decimal "return_at"
+    t.datetime "return_at"
     t.integer "state_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_user_contents_on_content_id"
-    t.index ["contentlist_2_id"], name: "index_user_contents_on_contentlist_2_id"
-    t.index ["contentlist_id"], name: "index_user_contents_on_contentlist_id"
+    t.index ["content_list_id"], name: "index_user_contents_on_content_list_id"
+    t.index ["content_list_v1_id"], name: "index_user_contents_on_content_list_v1_id"
     t.index ["state_id"], name: "index_user_contents_on_state_id"
     t.index ["user_id"], name: "index_user_contents_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.text "username"
-    t.text "password"
+    t.text "username", null: false
+    t.text "password", null: false
     t.integer "terms_accepted", default: 0, null: false
     t.integer "log", default: 0, null: false
     t.datetime "created_at", null: false
