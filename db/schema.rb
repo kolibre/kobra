@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_21_182750) do
+ActiveRecord::Schema.define(version: 2019_02_21_183224) do
 
   create_table "announcement_audios", force: :cascade do |t|
     t.integer "announcement_text_id"
@@ -82,7 +82,6 @@ ActiveRecord::Schema.define(version: 2019_02_21_182750) do
     t.integer "category_id"
     t.integer "daisy_format_id"
     t.text "title", null: false
-    t.decimal "date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_contents_on_category_id"
@@ -122,6 +121,15 @@ ActiveRecord::Schema.define(version: 2019_02_21_182750) do
     t.index ["question_id"], name: "index_question_inputs_on_question_id"
   end
 
+  create_table "question_question_texts", force: :cascade do |t|
+    t.integer "question_id"
+    t.integer "question_text_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_question_question_texts_on_question_id"
+    t.index ["question_text_id"], name: "index_question_question_texts_on_question_text_id"
+  end
+
   create_table "question_texts", force: :cascade do |t|
     t.integer "language_id"
     t.integer "text", null: false
@@ -154,6 +162,7 @@ ActiveRecord::Schema.define(version: 2019_02_21_182750) do
   create_table "user_announcements", force: :cascade do |t|
     t.integer "user_id"
     t.integer "announcement_id"
+    t.datetime "read_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["announcement_id"], name: "index_user_announcements_on_announcement_id"
@@ -174,23 +183,23 @@ ActiveRecord::Schema.define(version: 2019_02_21_182750) do
     t.integer "user_id"
     t.integer "content_id"
     t.integer "content_list_id"
-    t.integer "content_list_2_id", default: 3
+    t.integer "content_list_v1_id", default: 3
     t.integer "return", null: false
     t.integer "returned", default: 0, null: false
-    t.decimal "return_at"
+    t.datetime "return_at"
     t.integer "state_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_user_contents_on_content_id"
-    t.index ["content_list_2_id"], name: "index_user_contents_on_content_list_2_id"
     t.index ["content_list_id"], name: "index_user_contents_on_content_list_id"
+    t.index ["content_list_v1_id"], name: "index_user_contents_on_content_list_v1_id"
     t.index ["state_id"], name: "index_user_contents_on_state_id"
     t.index ["user_id"], name: "index_user_contents_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.text "username"
-    t.text "password"
+    t.text "username", null: false
+    t.text "password", null: false
     t.integer "terms_accepted", default: 0, null: false
     t.integer "log", default: 0, null: false
     t.datetime "created_at", null: false
