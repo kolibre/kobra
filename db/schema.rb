@@ -72,7 +72,7 @@ ActiveRecord::Schema.define(version: 2019_02_21_183224) do
     t.integer "content_id"
     t.text "filename", default: "", null: false
     t.integer "bytes", default: 0, null: false
-    t.text "mimetype", default: "unknown", null: false
+    t.text "mime_type", default: "unknown", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_content_resources_on_content_id"
@@ -139,7 +139,7 @@ ActiveRecord::Schema.define(version: 2019_02_21_183224) do
   end
 
   create_table "question_types", force: :cascade do |t|
-    t.string "type", null: false
+    t.string "type_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

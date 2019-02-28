@@ -8,8 +8,8 @@
 
 categories = Category.create([{ name: 'BOOK' }, { name: 'MAGAZINE' }, 
     { name: 'NEWSPAPER' }, { name: 'OTHER' }])
-question_types = QuestionType.create([{ type: 'multipleChoiceQuestion' }, 
-    { type: 'inputQuestion' }, { type: 'choice' }, { type: 'contentListRef' }, 
-    { type: 'label' }])
+question_types = QuestionType.create([{ type_name: 'multipleChoiceQuestion' }, 
+    { type_name: 'inputQuestion' }, { type_name: 'choice' }, { type_name: 'contentListRef' }, 
+    { type_name: 'label' }])
 states = State.create([{ state: 'START'}, { state: 'PAUSE' }, 
     { state: 'RESUME' }, { state: 'FINISH' }])

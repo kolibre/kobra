@@ -4,7 +4,7 @@ class CreateContentResources < ActiveRecord::Migration[5.2]
       t.references :content, foreign_key: true
       t.text :filename, null: false, default: ''
       t.integer :bytes, null: false, default: 0
-      t.text :mimetype, null: false, default: 'unknown'
+      t.text :mime_type, null: false, default: 'unknown'
 
       t.timestamps
     end
