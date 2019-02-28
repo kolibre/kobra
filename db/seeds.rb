@@ -13,3 +13,9 @@ question_types = QuestionType.create([{ type_name: 'multipleChoiceQuestion' },
     { type_name: 'label' }])
 states = State.create([{ state: 'START'}, { state: 'PAUSE' }, 
     { state: 'RESUME' }, { state: 'FINISH' }])
+content_lists = ContentList.create([{ name: 'bookshelf' }, { name: 'new' },
+    { name: 'issued' }, { name: 'expired' }, { name: 'search' },
+    { name: 'browse' }])
+languages = Language.create([{ lang: 'en' }, { lang: 'sv'}, { lang: 'fi' }])
+daisy_formats = DaisyFormat.create([{ format: 'Daisy 2.02' },
+    { format: 'ANSI/NISO Z39.86-2005' }, { format: 'PDTB2' }])
