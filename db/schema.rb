@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_21_164321) do
+ActiveRecord::Schema.define(version: 2019_02_21_165021) do
 
   create_table "announcement_audios", force: :cascade do |t|
     t.integer "announcement_text_id"
@@ -46,8 +46,8 @@ ActiveRecord::Schema.define(version: 2019_02_21_164321) do
 
   create_table "content_audios", force: :cascade do |t|
     t.integer "content_id"
-    t.integer "size"
-    t.integer "length"
+    t.integer "size", null: false
+    t.integer "length", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_content_audios_on_content_id"
@@ -57,6 +57,25 @@ ActiveRecord::Schema.define(version: 2019_02_21_164321) do
     t.text "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "content_metadata", force: :cascade do |t|
+    t.integer "content_id"
+    t.text "key", null: false
+    t.text "value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_id"], name: "index_content_metadata_on_content_id"
+  end
+
+  create_table "content_resources", force: :cascade do |t|
+    t.integer "content_id"
+    t.text "filename", default: "", null: false
+    t.integer "bytes", default: 0, null: false
+    t.text "mimetype", default: "unknown", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["content_id"], name: "index_content_resources_on_content_id"
   end
 
   create_table "contents", force: :cascade do |t|
