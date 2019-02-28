@@ -11,3 +11,5 @@ categories = Category.create([{ name: 'BOOK' }, { name: 'MAGAZINE' },
 question_types = QuestionType.create([{ type: 'multipleChoiceQuestion' }, 
     { type: 'inputQuestion' }, { type: 'choice' }, { type: 'contentListRef' }, 
     { type: 'label' }])
+states = State.create([{ state: 'START'}, { state: 'PAUSE' }, 
+    { state: 'RESUME' }, { state: 'FINISH' }])
