@@ -46,6 +46,6 @@ class AnnouncementAudiosController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def announcement_audio_params
-      params.require(:announcement_audio).permit(:announcementtext, :size, :length)
+      params.require(:announcement_audio).permit(:announcement_text, :size, :length)
     end
 end

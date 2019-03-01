@@ -46,6 +46,6 @@ class UserContentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_content_params
-      params.require(:user_content).permit(:user_id, :content_id, :contentlist_id, :return, :returned, :return_at, :state_id)
+      params.require(:user_content).permit(:user_id, :content_id, :content_list_id, :content_list_id_v1, :return, :returned, :return_at, :state_id)
     end
 end

@@ -8,6 +8,6 @@
 
 categories = Category.create([{ name: 'BOOK' }, { name: 'MAGAZINE' }, 
     { name: 'NEWSPAPER' }, { name: 'OTHER' }])
-question_types = QuestionType.create([{ type_name: 'multipleChoiceQuestion' }, 
-    { type_name: 'inputQuestion' }, { type_name: 'choice' }, { type_name: 'contentListRef' }, 
-    { type_name: 'label' }])
+question_types = QuestionType.create([{ name: 'multipleChoiceQuestion' }, 
+    { name: 'inputQuestion' }, { name: 'choice' }, { name: 'contentListRef' }, 
+    { name: 'label' }])
