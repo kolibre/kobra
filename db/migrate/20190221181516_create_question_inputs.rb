@@ -5,7 +5,7 @@ class CreateQuestionInputs < ActiveRecord::Migration[5.2]
       t.integer :allow_multiple_selections, default: 0
       t.text :text_numeric, default: nil
       t.text :text_alphanumeric, default: nil
-      t.integer :audio, default: nil
+      t.text :audio, default: nil
       t.text :default_value, default: nil
 
       t.timestamps
