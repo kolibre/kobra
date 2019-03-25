@@ -202,6 +202,7 @@ ActiveRecord::Schema.define(version: 2019_02_21_183224) do
     t.text "password", null: false
     t.integer "terms_accepted", default: 0, null: false
     t.integer "log", default: 0, null: false
+    t.boolean "activated", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
