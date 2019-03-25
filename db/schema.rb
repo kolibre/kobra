@@ -199,7 +199,7 @@ ActiveRecord::Schema.define(version: 2019_02_21_183224) do
 
   create_table "users", force: :cascade do |t|
     t.text "username", null: false
-    t.text "password", null: false
+    t.text "password"
     t.integer "terms_accepted", default: 0, null: false
     t.integer "log", default: 0, null: false
     t.boolean "activated", default: false, null: false
