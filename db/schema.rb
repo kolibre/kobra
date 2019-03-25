@@ -111,9 +111,9 @@ ActiveRecord::Schema.define(version: 2019_02_21_183224) do
 
   create_table "question_inputs", force: :cascade do |t|
     t.integer "question_id"
-    t.integer "allow_multiple_selections", default: 0
-    t.text "text_numeric"
-    t.text "text_alphanumeric"
+    t.integer "allow_multiple_selections"
+    t.integer "text_numeric"
+    t.integer "text_alphanumeric"
     t.integer "audio"
     t.text "default_value"
     t.datetime "created_at", null: false
