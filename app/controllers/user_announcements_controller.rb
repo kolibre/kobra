@@ -46,6 +46,6 @@ class UserAnnouncementsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_announcement_params
-      params.require(:user_announcement).permit(:user_id, :announcement_id)
+      params.require(:user_announcement).permit(:user_id, :announcement_id, :read_at)
     end
 end

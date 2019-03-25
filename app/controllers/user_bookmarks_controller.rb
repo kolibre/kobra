@@ -46,6 +46,6 @@ class UserBookmarksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def user_bookmark_params
-      params.require(:user_bookmark).permit(:user_id, :content_id, :bookmarkset)
+      params.require(:user_bookmark).permit(:user_id, :content_id, :bookmark_set)
     end
 end

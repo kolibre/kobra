@@ -70,7 +70,7 @@ ActiveRecord::Schema.define(version: 2019_02_21_183224) do
 
   create_table "content_resources", force: :cascade do |t|
     t.integer "content_id"
-    t.text "filename", default: "", null: false
+    t.text "file_name", default: "", null: false
     t.integer "bytes", default: 0, null: false
     t.text "mime_type", default: "unknown", null: false
     t.datetime "created_at", null: false
@@ -111,9 +111,9 @@ ActiveRecord::Schema.define(version: 2019_02_21_183224) do
 
   create_table "question_inputs", force: :cascade do |t|
     t.integer "question_id"
-    t.integer "allow_multiple_selections"
-    t.integer "text_numeric"
-    t.integer "text_alphanumeric"
+    t.integer "allow_multiple_selections", default: 0
+    t.text "text_numeric"
+    t.text "text_alphanumeric"
     t.integer "audio"
     t.text "default_value"
     t.datetime "created_at", null: false
@@ -132,14 +132,14 @@ ActiveRecord::Schema.define(version: 2019_02_21_183224) do
 
   create_table "question_texts", force: :cascade do |t|
     t.integer "language_id"
-    t.integer "text", null: false
+    t.text "text", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["language_id"], name: "index_question_texts_on_language_id"
   end
 
   create_table "question_types", force: :cascade do |t|
-    t.string "type_name", null: false
+    t.text "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

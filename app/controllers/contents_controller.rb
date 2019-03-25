@@ -46,6 +46,6 @@ class ContentsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def content_params
-      params.require(:content).permit(:category_id, :daisyformat_id, :title, :date)
+      params.require(:content).permit(:category_id, :daisy_format_id, :title)
     end
 end
