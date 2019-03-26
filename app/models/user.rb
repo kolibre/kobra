@@ -1,7 +1,7 @@
-require 'securerandom'
+require 'sysrandom'
 class User < ApplicationRecord
   before_save :generate_password
   def generate_password
-    self.password ||= 'securePassword'
+    self.password ||= Sysrandom.base64(8)
   end
 end

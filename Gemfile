@@ -45,3 +45,5 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # Use Hirb to make database queries more legible.
 gem 'hirb'
+# Use SysRandom to generate cryptographically secure passwords for users
+gem 'sysrandom'
