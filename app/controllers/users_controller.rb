@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update, :destroy, :activate, :deactivate]
 
   # GET /users
   def index
@@ -19,6 +19,24 @@ class UsersController < ApplicationController
 
     if @user.save
       render json: @user, status: :created, location: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+  def activate
+    @user.activated = true
+    if @user.save
+      render json: @user
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+  end
+
+  def deactivate
+    @user.activated = false
+    if @user.save
+      render json: @user
     else
       render json: @user.errors, status: :unprocessable_entity
     end
