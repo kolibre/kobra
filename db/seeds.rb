@@ -18,7 +18,9 @@ states = State.create([{ state: 'START'}, { state: 'PAUSE' },
 content_lists = ContentList.create([{ name: 'bookshelf' }, { name: 'new' },
                                     { name: 'issued' }, { name: 'expired' },
                                     { name: 'search' }, { name: 'browse' }])
-languages = Language.create([{ lang: 'en' }, { lang: 'sv'}, { lang: 'fi' }])
+ContentList.find_by(name: 'search').update_column(:id, 20)
+ContentList.find_by(name: 'browse').update_column(:id, 30)
+languages = Language.create([{ lang: 'en' }, { lang: 'sv' }, { lang: 'fi' }])
 daisy_formats = DaisyFormat.create([{ format: 'Daisy 2.02' },
                                     { format: 'ANSI/NISO Z39.86-2005' },
                                     { format: 'PDTB2' }])
