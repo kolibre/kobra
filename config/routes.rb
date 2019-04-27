@@ -5,9 +5,9 @@ Rails.application.routes.draw do
   resources :question_inputs
   resources :questions
   resources :question_types
-  resources :content_resources
-  resources :content_metadata
-  resources :content_audios
+  resources :content_resources, except: %i[update show index]
+  resources :content_metadata, except: %i[update show index]
+  resources :content_audios, except: %i[update show index]
   resources :user_contents
   resources :states
   resources :content_lists
