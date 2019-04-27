@@ -3,14 +3,22 @@ class ContentsController < ApplicationController
 
   # GET /contents
   def index
-    @contents = Content.all
-
-    render json: @contents
+    render json: {
+      contents: Content.all,
+      content_metadata: ContentMetadatum.all,
+      content_audios: ContentAudio.all,
+      content_resources: ContentResource.all
+    }
   end
 
   # GET /contents/1
   def show
-    render json: @content
+    render json: {
+      contents: @content,
+      content_metadata: @content_metadata,
+      content_audios: @content_audios,
+      content_resources: @content_resources
+    }
   end
 
   # POST /contents
@@ -39,13 +47,17 @@ class ContentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_content
-      @content = Content.find(params[:id])
-    end
 
-    # Only allow a trusted parameter "white list" through.
-    def content_params
-      params.require(:content).permit(:category_id, :daisy_format_id, :title)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_content
+    @content = Content.find(params[:id])
+    @content_metadata = ContentMetadatum.where(content_id: params[:id])
+    @content_audios = ContentAudio.where(content_id: params[:id])
+    @content_resources = ContentResource.where(content_id: params[:id])
+  end
+
+  # Only allow a trusted parameter "white list" through.
+  def content_params
+    params.require(:content).permit(:category_id, :daisy_format_id, :title)
+  end
 end
