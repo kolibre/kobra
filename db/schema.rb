@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_21_183224) do
+ActiveRecord::Schema.define(version: 2019_05_08_030826) do
 
   create_table "announcement_audios", force: :cascade do |t|
     t.integer "announcement_text_id"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2019_02_21_183224) do
   end
 
   create_table "announcements", force: :cascade do |t|
-    t.text "type"
+    t.text "category"
     t.text "priority", default: "LOW", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
