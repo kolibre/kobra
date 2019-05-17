@@ -302,38 +302,38 @@ content_resources = ContentResource.create([
 #     {id: 50, parent: 45, question_type_id: 5}, # endpoint for feedback
 # ])
 # Insert qith raw since the above failed
-# NOTE: only for SQLite3
+# NOTE: only for PostgreSQL
 connection = ActiveRecord::Base.connection()
 sql = <<-EOL
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (1,0,1,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (2,1,3,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (3,1,3,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (4,1,3,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (20,2,1,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (21,20,3,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (22,20,3,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (23,21,2,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (24,22,2,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (25,23,4,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (26,24,4,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (30,3,1,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (31,30,3,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (32,30,3,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (33,30,3,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (34,31,4,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (35,32,4,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (36,33,4,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (40,4,1,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (41,4,2,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (42,40,3,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (43,40,3,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (44,40,3,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (45,40,3,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (46,41,5,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (47,42,5,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (48,43,5,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (49,44,5,datetime('now'),datetime('now'));
-  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (50,45,5,datetime('now'),datetime('now'));
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (1,0,1,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (2,1,3,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (3,1,3,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (4,1,3,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (20,2,1,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (21,20,3,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (22,20,3,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (23,21,2,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (24,22,2,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (25,23,4,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (26,24,4,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (30,3,1,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (31,30,3,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (32,30,3,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (33,30,3,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (34,31,4,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (35,32,4,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (36,33,4,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (40,4,1,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (41,4,2,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (42,40,3,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (43,40,3,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (44,40,3,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (45,40,3,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (46,41,5,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (47,42,5,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (48,43,5,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (49,44,5,NOW(),NOW());
+  INSERT INTO questions (id, parent_id, question_type_id, updated_at, created_at) VALUES (50,45,5,NOW(),NOW());
 EOL
 sql.split(';').each do |s|
   connection.execute(s.strip) unless s.strip.empty?
@@ -492,12 +492,12 @@ user_announcements = UserAnnouncement.create([
 #     {user_id: 1, content_id: 3, content_list_id: 1, content_list_v1_id: 2, return: 1},
 # ])
 # Insert qith raw since the above did not produce any entries
-# NOTE: only for SQLite3
+# NOTE: only for PostgreSQL
 connection = ActiveRecord::Base.connection()
 sql = <<-EOL
-  INSERT INTO user_contents (user_id, content_id, content_list_id, content_list_v1_id, return, updated_at, created_at) VALUES (1,1,1,2,1,datetime('now'),datetime('now'));
-  INSERT INTO user_contents (user_id, content_id, content_list_id, content_list_v1_id, return, updated_at, created_at) VALUES (1,2,1,2,1,datetime('now'),datetime('now'));
-  INSERT INTO user_contents (user_id, content_id, content_list_id, content_list_v1_id, return, updated_at, created_at) VALUES (1,3,1,2,1,datetime('now'),datetime('now'));
+  INSERT INTO user_contents (user_id, content_id, content_list_id, content_list_v1_id, return, updated_at, created_at) VALUES (1,1,1,2,1,NOW(),NOW());
+  INSERT INTO user_contents (user_id, content_id, content_list_id, content_list_v1_id, return, updated_at, created_at) VALUES (1,2,1,2,1,NOW(),NOW());
+  INSERT INTO user_contents (user_id, content_id, content_list_id, content_list_v1_id, return, updated_at, created_at) VALUES (1,3,1,2,1,NOW(),NOW());
 EOL
 sql.split(';').each do |s|
   connection.execute(s.strip) unless s.strip.empty?
