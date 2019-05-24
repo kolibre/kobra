@@ -6,7 +6,7 @@ class CreateQuestionInputs < ActiveRecord::Migration[5.2]
       t.integer :text_numeric, default: nil
       t.integer :text_alphanumeric, default: nil
       t.integer :audio, default: nil
-      t.text :default_value, default: nil
+      t.text
 
       t.timestamps
     end
