@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 2019_05_24_011519) do
 
   create_table "announcements", force: :cascade do |t|
     t.text "category"
-    t.text "priority", default: "LOW", null: false
+    t.text "priority", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -70,9 +70,9 @@ ActiveRecord::Schema.define(version: 2019_05_24_011519) do
 
   create_table "content_resources", force: :cascade do |t|
     t.integer "content_id"
-    t.text "file_name", default: "", null: false
+    t.text "file_name", null: false
     t.integer "bytes", default: 0, null: false
-    t.text "mime_type", default: "unknown", null: false
+    t.text "mime_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_content_resources_on_content_id"
