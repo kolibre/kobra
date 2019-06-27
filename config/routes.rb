@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :question_inputs
   resources :questions
   resources :question_types
+  # TODO: decide if deletes should be prohibited as well.
   resources :content_resources, except: %i[update show index]
   resources :content_metadata, except: %i[update show index]
   resources :content_audios, except: %i[update show index]

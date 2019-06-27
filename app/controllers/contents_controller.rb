@@ -3,12 +3,9 @@ class ContentsController < ApplicationController
 
   # GET /contents
   def index
-    render json: {
-      contents: Content.all,
-      content_metadata: ContentMetadatum.all,
-      content_audios: ContentAudio.all,
-      content_resources: ContentResource.all
-    }
+    @contents = Content.all
+
+    render json: @contents
   end
 
   # GET /contents/1
