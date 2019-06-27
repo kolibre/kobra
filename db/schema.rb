@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_08_030826) do
+ActiveRecord::Schema.define(version: 2019_05_24_011519) do
 
   create_table "announcement_audios", force: :cascade do |t|
     t.integer "announcement_text_id"
@@ -195,6 +195,16 @@ ActiveRecord::Schema.define(version: 2019_05_08_030826) do
     t.index ["content_list_v1_id"], name: "index_user_contents_on_content_list_v1_id"
     t.index ["state_id"], name: "index_user_contents_on_state_id"
     t.index ["user_id"], name: "index_user_contents_on_user_id"
+  end
+
+  create_table "user_logs", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "ip"
+    t.text "request"
+    t.text "response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_logs_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
