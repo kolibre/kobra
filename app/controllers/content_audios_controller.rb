@@ -46,6 +46,6 @@ class ContentAudiosController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def content_audio_params
-      params.require(:content_audio).permit(:content_id, :size, :length)
+      params.require(:content_audio).permit(:content_id, :size, :length, :audio)
     end
 end
