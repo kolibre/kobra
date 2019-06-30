@@ -25,4 +25,5 @@ Rails.application.routes.draw do
   get '/users/:id/activate', to: 'users#activate'
   get '/users/:id/deactivate', to: 'users#deactivate'
   post 'contents/:id/audio', to: 'content_audios#create'
+  post 'contents/:id/resource', to: 'content_resources#create'
 end

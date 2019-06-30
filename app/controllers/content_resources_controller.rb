@@ -46,6 +46,6 @@ class ContentResourcesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def content_resource_params
-      params.require(:content_resource).permit(:content_id, :file_name, :bytes, :mime_type)
+      params.require(:content_resource).permit(:content_id, :file_name, :bytes, :mime_type, :resource)
     end
 end
