@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_logs
   resources :question_question_texts
   resources :question_audios
   resources :question_texts

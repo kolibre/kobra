@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 2019_06_30_161849) do
   end
 
   create_table "announcements", force: :cascade do |t|
-    t.text "type"
-    t.text "priority", default: "LOW", null: false
+    t.text "category"
+    t.text "priority", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -92,9 +92,9 @@ ActiveRecord::Schema.define(version: 2019_06_30_161849) do
 
   create_table "content_resources", force: :cascade do |t|
     t.integer "content_id"
-    t.text "file_name", default: "", null: false
+    t.text "file_name", null: false
     t.integer "bytes", default: 0, null: false
-    t.text "mime_type", default: "unknown", null: false
+    t.text "mime_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "resource"
@@ -218,6 +218,16 @@ ActiveRecord::Schema.define(version: 2019_06_30_161849) do
     t.index ["content_list_v1_id"], name: "index_user_contents_on_content_list_v1_id"
     t.index ["state_id"], name: "index_user_contents_on_state_id"
     t.index ["user_id"], name: "index_user_contents_on_user_id"
+  end
+
+  create_table "user_logs", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "ip"
+    t.text "request"
+    t.text "response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_logs_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

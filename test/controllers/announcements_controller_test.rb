@@ -12,7 +12,7 @@ class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create announcement" do
     assert_difference('Announcement.count') do
-      post announcements_url, params: { announcement: { priority: @announcement.priority, type: @announcement.type } }, as: :json
+      post announcements_url, params: { announcement: { priority: @announcement.priority, category: @announcement.category } }, as: :json
     end
 
     assert_response 201
@@ -24,7 +24,7 @@ class AnnouncementsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update announcement" do
-    patch announcement_url(@announcement), params: { announcement: { priority: @announcement.priority, type: @announcement.type } }, as: :json
+    patch announcement_url(@announcement), params: { announcement: { priority: @announcement.priority, category: @announcement.category } }, as: :json
     assert_response 200
   end
 
