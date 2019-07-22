@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_30_161849) do
+ActiveRecord::Schema.define(version: 2019_07_22_194144) do
 
   create_table "announcement_audios", force: :cascade do |t|
     t.integer "announcement_text_id"
@@ -76,7 +76,7 @@ ActiveRecord::Schema.define(version: 2019_06_30_161849) do
     t.text "mime_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "resource"
+    t.string "resource", null: false
     t.index ["content_id"], name: "index_content_resources_on_content_id"
   end
 
