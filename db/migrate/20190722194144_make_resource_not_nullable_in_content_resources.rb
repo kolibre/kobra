@@ -4,6 +4,6 @@ class MakeResourceNotNullableInContentResources < ActiveRecord::Migration[5.2]
   end
 
   def down
-    change_column_null(:content_resources, :resource, false)
+    change_column_null(:content_resources, :resource, true)
   end
 end
