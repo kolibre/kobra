@@ -24,3 +24,6 @@ languages = Language.create([{ lang: 'en' }, { lang: 'sv' }, { lang: 'fi' }])
 daisy_formats = DaisyFormat.create([{ format: 'Daisy 2.02' },
                                     { format: 'ANSI/NISO Z39.86-2005' },
                                     { format: 'PDTB2' }])
+contents = Content.create([{ category_id: 1, daisy_format_id: 1,
+                             title: 'Harry Potter and the Philosopher\'s Stone'
+                            }])
