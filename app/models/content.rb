@@ -4,6 +4,7 @@ class Content < ApplicationRecord
   has_many :content_audios, dependent: :destroy
   has_many :content_metadata, dependent: :destroy
   has_many :content_resources, dependent: :destroy
+  validates :title, uniqueness: true
 
   before_destroy :ensure_safe
 
