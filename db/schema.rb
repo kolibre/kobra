@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_24_011519) do
+ActiveRecord::Schema.define(version: 2019_07_23_021432) do
 
   create_table "announcement_audios", force: :cascade do |t|
     t.integer "announcement_text_id"
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 2019_05_24_011519) do
     t.integer "length", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "audio", null: false
     t.index ["content_id"], name: "index_content_audios_on_content_id"
   end
 
@@ -75,6 +76,7 @@ ActiveRecord::Schema.define(version: 2019_05_24_011519) do
     t.text "mime_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "resource", null: false
     t.index ["content_id"], name: "index_content_resources_on_content_id"
   end
 
@@ -86,6 +88,7 @@ ActiveRecord::Schema.define(version: 2019_05_24_011519) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_contents_on_category_id"
     t.index ["daisy_format_id"], name: "index_contents_on_daisy_format_id"
+    t.index ["title"], name: "index_contents_on_title", unique: true
   end
 
   create_table "daisy_formats", force: :cascade do |t|

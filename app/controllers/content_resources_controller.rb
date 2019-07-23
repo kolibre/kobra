@@ -15,10 +15,11 @@ class ContentResourcesController < ApplicationController
 
   # POST /content_resources
   def create
-    @content_resource = ContentResource.new(content_resource_params)
+    @content = Content.find(params[:content_id])
+    @content_resource = @content.content_resources.build(content_resource_params)
 
     if @content_resource.save
-      render json: @content_resource, status: :created, location: @content_resource
+      render json: @content_resource, status: :created, location: @content
     else
       render json: @content_resource.errors, status: :unprocessable_entity
     end
@@ -46,6 +47,6 @@ class ContentResourcesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def content_resource_params
-      params.require(:content_resource).permit(:content_id, :file_name, :bytes, :mime_type)
+      params.require(:content_resource).permit(:content_id, :file_name, :bytes, :mime_type, :resource)
     end
 end
