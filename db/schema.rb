@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_22_194727) do
+ActiveRecord::Schema.define(version: 2019_07_23_021432) do
 
   create_table "announcement_audios", force: :cascade do |t|
     t.integer "announcement_text_id"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(version: 2019_07_22_194727) do
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_contents_on_category_id"
     t.index ["daisy_format_id"], name: "index_contents_on_daisy_format_id"
+    t.index ["title"], name: "index_contents_on_title", unique: true
   end
 
   create_table "daisy_formats", force: :cascade do |t|
