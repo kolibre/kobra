@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_31_071131) do
+ActiveRecord::Schema.define(version: 2019_10_31_075631) do
 
   create_table "announcement_audios", force: :cascade do |t|
     t.integer "announcement_text_id"
@@ -190,7 +190,7 @@ ActiveRecord::Schema.define(version: 2019_10_31_071131) do
     t.boolean "return", default: false, null: false
     t.boolean "returned", default: false, null: false
     t.datetime "return_at"
-    t.integer "state_id"
+    t.integer "state_id", default: 1
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["content_id"], name: "index_user_contents_on_content_id"
