@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_23_021432) do
+ActiveRecord::Schema.define(version: 2019_10_31_065020) do
 
   create_table "announcement_audios", force: :cascade do |t|
     t.integer "announcement_text_id"
@@ -185,7 +185,7 @@ ActiveRecord::Schema.define(version: 2019_07_23_021432) do
   create_table "user_contents", force: :cascade do |t|
     t.integer "user_id"
     t.integer "content_id"
-    t.integer "content_list_id"
+    t.integer "content_list_id", default: 1
     t.integer "content_list_v1_id", default: 3
     t.integer "return", null: false
     t.integer "returned", default: 0, null: false
