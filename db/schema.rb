@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_31_075631) do
+ActiveRecord::Schema.define(version: 2019_11_01_041149) do
 
   create_table "announcement_audios", force: :cascade do |t|
     t.integer "announcement_text_id"
@@ -213,8 +213,8 @@ ActiveRecord::Schema.define(version: 2019_10_31_075631) do
   create_table "users", force: :cascade do |t|
     t.text "username", null: false
     t.text "password"
-    t.integer "terms_accepted", default: 0, null: false
-    t.integer "log", default: 0, null: false
+    t.boolean "terms_accepted", default: false, null: false
+    t.boolean "log", default: false, null: false
     t.boolean "activated", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
