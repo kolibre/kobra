@@ -1,5 +1,6 @@
 class UserContentsController < ApplicationController
   before_action :set_user_content, only: [:show, :update, :destroy]
+  before_action :set_content, only: [:add, :remove]
 
   # GET /user_contents
   def index
@@ -24,6 +25,35 @@ class UserContentsController < ApplicationController
     end
   end
 
+  # POST /user_contents/add - add content to one or many users
+  def add
+    must_return = params.has_key?("return") ? params[:return] : false
+    @user_contents = []
+    if params[:users].nil?
+      @users = User.all
+      @users.each do |user|
+        @user_content = UserContent.create(user_id: user.id, content_id: @content.id, return: must_return)
+        @user_contents.push(@user_content)
+      end
+    else
+      @users = User.where(id: params[:users])
+      @users.each do |user|
+        @user_content = UserContent.create(user_id: user.id, content_id: @content.id, return: must_return)
+        @user_contents.push(@user_content)
+      end
+    end
+    render json: @user_contents
+  end
+
+  # POST /user_contents/remove - remove content from one or many users
+  def remove
+    if params[:users].nil?
+      UserContent.where(content_id: @content.id).destroy_all
+    else
+      UserContent.where(user_id: params[:users], content_id: @content.id).destroy_all
+    end
+  end
+
   # PATCH/PUT /user_contents/1
   def update
     if @user_content.update(user_content_params)
@@ -44,8 +74,12 @@ class UserContentsController < ApplicationController
       @user_content = UserContent.find(params[:id])
     end
 
+    def set_content
+      @content = Content.find(params[:content_id])
+    end
+
     # Only allow a trusted parameter "white list" through.
     def user_content_params
-      params.require(:user_content).permit(:user_id, :content_id, :content_list_id, :content_list_id_v1, :return, :returned, :return_at, :state_id)
+      params.require(:user_content).permit(:user_id, :users, :content_id, :content_list_id, :content_list_id_v1, :return, :return_at)
     end
 end

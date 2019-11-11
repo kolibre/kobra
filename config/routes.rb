@@ -28,4 +28,6 @@ Rails.application.routes.draw do
   get '/users/:id/deactivate', to: 'users#deactivate'
   post 'contents/:content_id/audio', to: 'content_audios#create'
   post 'contents/:content_id/resource', to: 'content_resources#create'
+  post '/user_contents/add', to: 'user_contents#add'
+  post '/user_contents/remove', to: 'user_contents#remove'
 end
