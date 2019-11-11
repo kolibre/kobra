@@ -1,0 +1,237 @@
+// A test suite to for bookshelf management API.
+
+url="http://127.0.0.1:3000"
+
+POST /users
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.username = "user1"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==1)
+
+POST /users
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.username = "user2"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==2)
+
+POST /users
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.username = "user3"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==3)
+
+POST /contents
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.category_id=1
+json.daisy_format_id=1
+json.title="title1"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==1)
+
+POST /contents
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.category_id=1
+json.daisy_format_id=1
+json.title="title2"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==2)
+
+POST /contents
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.category_id=1
+json.daisy_format_id=1
+json.title="title3"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==3)
+
+GET /user_contents
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.length==0)
+
+POST /user_contents
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_id=4
+json.user_id=1
+Response
+must(status==422)
+
+POST /user_contents
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_id=1
+json.user_id=4
+Response
+must(status==422)
+
+POST /user_contents
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_id=1
+json.user_id=1
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==1)
+must(j.content_id==1)
+must(j.user_id==1)
+must(j.content_list_id==1)
+must(j.content_list_v1_id==3)
+must(j.return==false)
+must(j.returned==false)
+must(j.return_at==null)
+must(j.state_id==1)
+
+POST /user_contents
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_id=1
+json.user_id=1
+Response
+must(status==422)
+
+PUT /user_contents/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.state_id=2
+json.returned=true
+json.returned_at="1970-01-01 00:00:00"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.returned==false)
+must(j.return_at==null)
+must(j.state_id==1)
+
+PUT /user_contents/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_list_id=3
+json.content_list_v1_id=1
+json.return=true
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.content_list_id==3)
+//must(j.content_list_v1_id==1) // TODO: support updating
+must(j.return==true)
+
+GET /user_contents
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.length==1)
+must(j[0].id==1)
+must(j[0].content_id==1)
+must(j[0].user_id==1)
+
+DELETE /user_contents/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+must(status==204)
+
+GET /user_contents
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.length==0)
+
+POST /user_contents/add
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_id=2
+json.users=[1,2]
+Response
+must(status==200) // TODO: change to 201
+j = JSON.parse(body)
+must(j.length==2)
+
+POST /user_contents/add
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_id=3
+Response
+must(status==200) // TODO: change to 201
+j = JSON.parse(body)
+must(j.length==3)
+
+GET /user_contents
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.length==5)
+
+POST /user_contents/remove
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_id=2
+Response
+must(status==204)
+
+POST /user_contents/remove
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_id=3
+json.users=[1,2]
+Response
+must(status==204)
+
+GET /user_contents
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.length==1)
+
+POST /user_contents/add
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_id=1
+json.users=[1,2]
+json.return=true
+Response
+must(status==200) // TODO: change to 201
+j = JSON.parse(body)
+must(j.length==2)
+must(j[0].return==true)
+must(j[1].return==true)
+
+POST /user_contents/add
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_id=1
+Response
+must(status==200) // TODO: change to 201
+j = JSON.parse(body)
+//must(j.length==1) // TODO: don't include nill entries
+//must(j[0].return==false)

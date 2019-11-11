@@ -1,0 +1,177 @@
+// A test suite to ensure data in constant tables can't be altered.
+
+url="http://127.0.0.1:3000"
+
+// 
+// Table categories.
+//
+
+GET /categories
+header["Accept"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.length==4)
+must(j[0].id==1)
+must(j[3].id==4)
+
+PUT /categories/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+j = JSON.parse(body)
+must(status==404)
+
+DELETE /categories/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+j = JSON.parse(body)
+must(status==404)
+
+POST /categories
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+j = JSON.parse(body)
+must(status==404)
+
+//
+// Table daisy_formats.
+//
+
+GET /daisy_formats
+header["Accept"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.length==3)
+must(j[0].id==1)
+must(j[2].id==3)
+
+PUT /daisy_formats/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+j = JSON.parse(body)
+must(status==404)
+
+DELETE /daisy_formats/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+j = JSON.parse(body)
+must(status==404)
+
+POST /daisy_formats
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+j = JSON.parse(body)
+must(status==404)
+
+//
+// Table content_lists.
+//
+
+GET /content_lists
+header["Accept"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.length==6)
+must(j[0].id==1)
+must(j[3].id==4)
+must(j[4].id==20)
+must(j[4].name=="search")
+must(j[5].id==30)
+must(j[5].name=="browse")
+
+PUT /content_lists/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+j = JSON.parse(body)
+must(status==404)
+
+DELETE /content_lists/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+j = JSON.parse(body)
+must(status==404)
+
+POST /content_lists
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+j = JSON.parse(body)
+must(status==404)
+
+//
+// Table states.
+//
+
+GET /states
+header["Accept"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.length==5)
+must(j[0].id==1)
+must(j[4].id==5)
+
+PUT /states/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+j = JSON.parse(body)
+must(status==404)
+
+DELETE /states/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+j = JSON.parse(body)
+must(status==404)
+
+POST /states
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+j = JSON.parse(body)
+must(status==404)
+
+//
+// Table question_types.
+//
+
+GET /question_types
+header["Accept"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.length==5)
+must(j[0].id==1)
+must(j[4].id==5)
+
+PUT /question_types/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+j = JSON.parse(body)
+must(status==404)
+
+DELETE /question_types/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+j = JSON.parse(body)
+must(status==404)
+
+POST /question_types
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+j = JSON.parse(body)
+must(status==404)
