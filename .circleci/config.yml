@@ -38,7 +38,7 @@ executors:
         name: postgres
         environment:
           POSTGRES_PASSWORD: password
-      - image: kolibre/kobra:${CIRCLE_SHA1}
+      - image: kolibreorg/kobra:${CIRCLE_SHA1}
         name: kobra
         environment:
           SECRET_KEY: citesting
