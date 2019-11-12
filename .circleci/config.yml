@@ -49,9 +49,9 @@ executors:
 jobs:
   test-migrations-postgres:
     docker:
-      - image: ruby:2.5.1
+      - image: ruby:2.5.7
         environment:
-          BUNDLER_VERSION: 2.0.1
+          BUNDLER_VERSION: 2.0.2
           DATABASE_URL: postgres://postgres:password@postgres:5432/kobra
       - image: postgres:11
         name: postgres
@@ -73,9 +73,9 @@ jobs:
           command: bundle exec rake db:migrate
   test-migrations-mysql:
     docker:
-      - image: ruby:2.5.1
+      - image: ruby:2.5.7
         environment:
-          BUNDLER_VERSION: 2.0.1
+          BUNDLER_VERSION: 2.0.2
           DATABASE_URL: mysql2://root:password@mysql:3306/kobra?pool=5
       - image: mysql:8.0
         name: mysql
