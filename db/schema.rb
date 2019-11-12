@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2019_11_01_142340) do
   create_table "contents", force: :cascade do |t|
     t.integer "category_id"
     t.integer "daisy_format_id"
-    t.text "title", null: false
+    t.string "title", limit: 256, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["category_id"], name: "index_contents_on_category_id"
