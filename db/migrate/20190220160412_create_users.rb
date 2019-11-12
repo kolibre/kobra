@@ -3,8 +3,8 @@ class CreateUsers < ActiveRecord::Migration[5.2]
     create_table :users do |t|
       t.text :username, null: false
       t.text :password
-      t.integer :terms_accepted, null: false, default: 0
-      t.integer :log, null: false, default: 0
+      t.boolean :terms_accepted, null: false, default: false
+      t.boolean :log, null: false, default: false
       t.boolean :activated, null: false, default: false
 
       t.timestamps

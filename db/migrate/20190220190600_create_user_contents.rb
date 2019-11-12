@@ -5,8 +5,8 @@ class CreateUserContents < ActiveRecord::Migration[5.2]
       t.references :content, foreign_key: true
       t.references :content_list
       t.references :content_list_v1, default: 3
-      t.integer :return, null: false
-      t.integer :returned, null: false, default: 0
+      t.boolean :return, null: false, default: false
+      t.boolean :returned, null: false, default: false
       t.datetime :return_at, default: nil
       t.references :state, foreign_key: true, default: nil
 
