@@ -97,6 +97,25 @@ jobs:
       - run:
           name: Apply migrations
           command: bundle exec rake db:migrate
+  test-migrations-sqlite:
+    docker:
+      - image: ruby:2.5.7
+        environment:
+          BUNDLER_VERSION: 2.0.2
+    steps:
+      - checkout
+      - run:
+          name: Install bundler
+          command: gem install bundler
+      - run:
+          name: Install Ruby dependencies
+          command: bundle install
+      - run:
+          name: Set up DB
+          command: bundle exec rake db:create
+      - run:
+          name: Apply migrations
+          command: bundle exec rake db:migrate
   build-kobra-docker-image:
     docker:
       - image: circleci/buildpack-deps:bionic-curl
@@ -150,10 +169,12 @@ workflows:
     jobs:
       - test-migrations-postgres
       - test-migrations-mysql
+      - test-migrations-sqlite
       - build-kobra-docker-image:
           requires:
             - test-migrations-postgres
             - test-migrations-mysql
+            - test-migrations-sqlite
       - test-case-constants:
           requires:
             - build-kobra-docker-image
