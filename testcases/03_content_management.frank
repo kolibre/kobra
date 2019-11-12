@@ -1,0 +1,122 @@
+// A test suite to for content management API.
+
+url="http://127.0.0.1:3000"
+
+GET /contents
+header["Accept"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.length==0)
+
+GET /content_metadata
+header["Accept"] = "application/json"
+Response
+must(status==404)
+
+GET /content_audios
+header["Accept"] = "application/json"
+Response
+must(status==404)
+
+GET /content_resources
+header["Accept"] = "application/json"
+Response
+must(status==404)
+
+POST /contents
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.category_id=1
+json.daisy_format_id=1
+json.title="foo"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==1)
+must(j.category_id==1)
+must(j.daisy_format_id==1)
+must(j.title=="foo")
+
+PUT /contents/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.category_id=2
+json.daisy_format_id=2
+json.title="bar"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.id==1)
+must(j.category_id==2)
+must(j.daisy_format_id==2)
+must(j.title=="bar")
+
+POST /contents
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.category_id=1
+json.daisy_format_id=1
+json.title="bar"
+Response
+must(status==422)
+
+POST /content_metadata
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_id=1
+json.key="foo"
+json.value="bar"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==1)
+must(j.key=="foo")
+must(j.value=="bar")
+
+PUT /content_metadata/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.key="bar"
+json.value="foo"
+Response
+must(status==404)
+
+POST /content_metadata
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_id=1
+json.key="foo"
+json.value="bar"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==2)
+must(j.key=="foo")
+must(j.value=="bar")
+
+// TODO: add content content audio
+// TODO: add content resources
+
+GET /contents
+header["Accept"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.length==1)
+
+GET /contents/1
+header["Accept"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.contents.id==1) // TODO: change to content
+must(j.content_metadata.length==2)
+must(j.content_audios.length==0)
+must(j.content_resources.length==0)
+
+DELETE /contents/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+must(status==204)

@@ -8,8 +8,8 @@ services:
     build: .
     environment:
       - SECRET_KEY=yourOwnSecretKey
+      - STORAGE_PATH=/tmp
       - DATABASE_URL=postgres://postgres:password@postgres:5432/kobra
-      - DATABASE_SEED=1
       - WAIT_FOR=tcp://postgres:5432
     ports:
       - 127.0.0.1:3000:3000
@@ -26,7 +26,6 @@ services:
   #   environment:
   #     - SECRET_KEY=yourOwnSecretKey
   #     - DATABASE_URL=mysql2://root:password@mysql:3306/kobra?pool=5
-  #     - DATABASE_SEED=1
   #     - WAIT_FOR=tcp://mysql:3306
   #   ports:
   #     - 127.0.0.1:3000:3000

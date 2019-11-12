@@ -6,6 +6,17 @@ then
     exit 1
 fi
 
+if [ "${STORAGE_PATH}" == "" ]
+then
+    echo "environment variable STORAGE_PATH must be specified"
+    exit 1
+fi
+if [ ! -d "${STORAGE_PATH}" ]
+then
+    echo "storage path '${STORAGE_PATH}' does not exist"
+    exit 2
+fi
+
 if [ "${DATABASE_URL}" == "" ]
 then
     echo "environment variable DATABASE_URL must be specified"

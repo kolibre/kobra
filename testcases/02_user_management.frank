@@ -1,0 +1,95 @@
+// A test suite to for user management API.
+
+url="http://127.0.0.1:3000"
+
+GET /users
+header["Accept"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.length==0)
+
+DELETE /users/1
+header["Accept"] = "application/json"
+Response
+must(status==404)
+
+POST /users
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.username = "foo"
+json.password = "bar"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==1)
+must(j.username=="foo")
+must(j.terms_accepted==false)
+must(j.log==false)
+must(j.activated==false)
+
+PUT /users/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.username = "foobar"
+json.terms_accepted = true
+json.log = true
+json.activated = true
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.id==1)
+must(j.username=="foobar")
+must(j.terms_accepted==true)
+must(j.log==true)
+must(j.activated==true)
+
+GET /users/1/deactivate
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.id==1)
+must(j.activated==false)
+
+GET /users/1/activate
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.id==1)
+must(j.activated==true)
+
+POST /users
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.username = "foo"
+json.password = "bar"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==2)
+
+POST /users
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.username = "foo"
+json.password = "bar"
+Response
+must(status==422)
+
+DELETE /users/2
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+must(status==204)
+
+GET /users
+header["Accept"] = "application/json"
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.length==1)
+must(j[0].username=="foobar")
