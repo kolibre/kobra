@@ -38,7 +38,7 @@ executors:
         name: postgres
         environment:
           POSTGRES_PASSWORD: password
-      - image: kolibre/kobra:${CIRCLE_SHA}
+      - image: kolibre/kobra:${CIRCLE_SHA1}
         name: kobra
         environment:
           SECRET_KEY: citesting
@@ -125,7 +125,7 @@ jobs:
           version: 18.06.0-ce
       - run:
           name: Build docker image
-          command: docker build -t kolibre/kobra:${CIRCLE_SHA} .
+          command: docker build -t kolibreorg/kobra:${CIRCLE_SHA1} .
   test-case-constants:
     executor:
       name: frank
@@ -158,10 +158,10 @@ jobs:
           version: 18.06.0-ce
       - run:
           name: Retag image
-          command: docker tag kolibre/kobra:${CIRCLE_SHA} kolibre/kobra:latest
+          command: docker tag kolibreorg/kobra:${CIRCLE_SHA1} kolibreorg/kobra:latest
       - run:
           name: Push image to dockerhub
-          command: echo "docker push kolibre/kobra:latest" # TODO: integrate with dockerhub
+          command: echo "docker push kolibreorg/kobra:latest" # TODO: integrate with dockerhub
 
 workflows:
   version: 2.1
