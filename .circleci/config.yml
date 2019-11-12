@@ -60,6 +60,9 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Install bundler
+          command: gem install bundler
+      - run:
           name: Install Ruby dependencies
           command: bundle install
       - run:
@@ -81,6 +84,9 @@ jobs:
           MYSQL_DATABASE: kobra
     steps:
       - checkout
+      - run:
+          name: Install bundler
+          command: gem install bundler
       - run:
           name: Install Ruby dependencies
           command: bundle install
