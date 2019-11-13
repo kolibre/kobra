@@ -1,51 +1,5 @@
 version: 2.1
 
-commands:
-  run-testcase:
-    parameters:
-      test-case:
-        type: string
-        default: case.frank
-    steps:
-      - checkout
-      - run:
-          name: Install frank testing tool
-          command: |
-            sudo curl -L git.io/frank -o /usr/local/bin/frank
-            sudo chmod 755 /usr/local/bin/frank
-      - run:
-          name: Waiting for Kobra to be ready
-          command: |
-            for i in $(seq 1 10);
-            do
-              nc -z kobra 3000 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for Kobra && exit 1
-      - run:
-          name: Change url in test case
-          command: sed -i 's;http://127.0.0.1:3000;http://kobra:3000;' << parameters.test-case >>
-      - run:
-          name: Run test case
-          command: frank -c << parameters.test-case >>
-
-executors:
-  frank:
-    docker:
-      - image: circleci/buildpack-deps:bionic-curl
-      - image: postgres:11
-        name: postgres
-        environment:
-          POSTGRES_PASSWORD: password
-      - image: kolibreorg/kobra:${CIRCLE_SHA1}
-        name: kobra
-        environment:
-          SECRET_KEY: citesting
-          STORAGE_PATH: /tmp
-          DATABASE_URL: postgres://postgres:password@postgres:5432/kobra
-          WAIT_FOR: tcp://postgres:5432
-
 jobs:
   test-migrations-postgres:
     docker:
@@ -116,7 +70,20 @@ jobs:
       - run:
           name: Apply migrations
           command: bundle exec rake db:migrate
-  build-kobra-docker-image:
+  run-api-tests:
+    machine:
+      image: ubuntu-1604:201903-01
+    steps:
+      - checkout
+      - run:
+          name: Install frank testing tool
+          command: |
+            sudo curl -L git.io/frank -o /usr/local/bin/frank
+            sudo chmod 755 /usr/local/bin/frank
+      - run:
+          name: Run test cases
+          command: ./run-api-tests.sh # builds the docker image and runs tests
+  build-and-publish-docker-image:
     docker:
       - image: circleci/buildpack-deps:bionic-curl
     steps:
@@ -125,40 +92,7 @@ jobs:
           version: 18.06.0-ce
       - run:
           name: Build docker image
-          command: docker build -t kolibreorg/kobra:${CIRCLE_SHA1} .
-  test-case-constants:
-    executor:
-      name: frank
-    steps:
-      - run-testcase:
-          test-case: ./testcases/01_constants.frank
-  test-case-user-managenent:
-    executor:
-      name: frank
-    steps:
-      - run-testcase:
-          test-case: ./testcases/02_user_management.frank
-  test-case-content-management:
-    executor:
-      name: frank
-    steps:
-      - run-testcase:
-          test-case: ./testcases/03_content_management.frank
-  test-case-bookshelf-management:
-    executor:
-      name: frank
-    steps:
-      - run-testcase:
-          test-case: ./testcases/04_bookshelf_management.frank
-  push-kobra-docker-image:
-    docker:
-      - image: circleci/buildpack-deps:bionic-curl
-    steps:
-      - setup_remote_docker:
-          version: 18.06.0-ce
-      - run:
-          name: Retag image
-          command: docker tag kolibreorg/kobra:${CIRCLE_SHA1} kolibreorg/kobra:latest
+          command: docker build -t kolibreorg/kobra:latest .
       - run:
           name: Push image to dockerhub
           command: echo "docker push kolibreorg/kobra:latest" # TODO: integrate with dockerhub
@@ -170,26 +104,11 @@ workflows:
       - test-migrations-postgres
       - test-migrations-mysql
       - test-migrations-sqlite
-      - build-kobra-docker-image:
+      - run-api-tests:
           requires:
             - test-migrations-postgres
             - test-migrations-mysql
             - test-migrations-sqlite
-      - test-case-constants:
+      - build-and-publish-docker-image:
           requires:
-            - build-kobra-docker-image
-      - test-case-user-managenent:
-          requires:
-            - build-kobra-docker-image
-      - test-case-content-management:
-          requires:
-            - build-kobra-docker-image
-      - test-case-bookshelf-management:
-          requires:
-            - build-kobra-docker-image
-      - push-kobra-docker-image:
-          requires:
-            - test-case-constants
-            - test-case-user-managenent
-            - test-case-content-management
-            - test-case-bookshelf-management
+            - run-api-tests
