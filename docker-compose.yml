@@ -4,13 +4,21 @@ services:
     image: postgres:11
     environment:
       - POSTGRES_PASSWORD=password
+  nginx:
+    image: nginx:1.17.5-alpine
+    volumes:
+      - media:/usr/share/nginx/html
+    ports:
+      - 127.0.0.1:8080:80
   kobra:
     build: .
     environment:
       - SECRET_KEY=yourOwnSecretKey
-      - STORAGE_PATH=/tmp
+      - STORAGE_PATH=/srv/media
       - DATABASE_URL=postgres://postgres:password@postgres:5432/kobra
       - WAIT_FOR=tcp://postgres:5432
+    volumes:
+      - media:/srv/media
     ports:
       - 127.0.0.1:3000:3000
     depends_on:
@@ -31,3 +39,6 @@ services:
   #     - 127.0.0.1:3000:3000
   #   depends_on:
   #     - mysql
+
+volumes:
+  media:
