@@ -8,24 +8,22 @@ commands:
         default: case.frank
     steps:
       - checkout
+      - setup_remote_docker:
+          version: 18.06.0-ce
+      - run:
+          name: Build docker image
+          command: docker build -t kolibreorg/kobra:${CIRCLE_SHA1} .
       - run:
           name: Install frank testing tool
           command: |
             sudo curl -L git.io/frank -o /usr/local/bin/frank
             sudo chmod 755 /usr/local/bin/frank
       - run:
-          name: Waiting for Kobra to be ready
-          command: |
-            for i in $(seq 1 10);
-            do
-              nc -z kobra 3000 && echo Success && exit 0
-              echo -n .
-              sleep 1
-            done
-            echo Failed waiting for Kobra && exit 1
+          name: Start Kobra docker image
+          command: docker run -d --rm -e SECRET_KEY=testing -e STORAGE_PATH=/tmp -e DATABASE_URL=sqlite3:/usr/src/app/db/prod.sqlite3 --name kobra -p 127.0.0.1:3000:3000 kolibreorg/kobra:${CIRCLE_SHA1} .
       - run:
-          name: Change url in test case
-          command: sed -i 's;http://127.0.0.1:3000;http://kobra:3000;' << parameters.test-case >>
+          name: Waiting for Kobra to be ready
+          command: sleep 10
       - run:
           name: Run test case
           command: frank -c << parameters.test-case >>
@@ -34,17 +32,6 @@ executors:
   frank:
     docker:
       - image: circleci/buildpack-deps:bionic-curl
-      - image: postgres:11
-        name: postgres
-        environment:
-          POSTGRES_PASSWORD: password
-      - image: kolibreorg/kobra:${CIRCLE_SHA1}
-        name: kobra
-        environment:
-          SECRET_KEY: citesting
-          STORAGE_PATH: /tmp
-          DATABASE_URL: postgres://postgres:password@postgres:5432/kobra
-          WAIT_FOR: tcp://postgres:5432
 
 jobs:
   test-migrations-postgres:
