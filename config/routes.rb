@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   resources :contents do
     resources :content_audios, except: %i[update show index create]
     resources :content_resources, except: %i[update show index]
-    resources :content_metadata, except: %i[update show index]
   end
+  resources :content_metadata, except: %i[update show index]
   resources :daisy_formats, except: %i[create update destroy]
   resources :categories, except: %i[create update destroy]
   resources :user_announcements
