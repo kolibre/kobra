@@ -3,7 +3,7 @@
 set -e
 
 # build image
-# docker build -t kobra:test .
+docker build -t kobra:test .
 
 for testcase in 01_constants.frank 02_user_management.frank 03_content_management.frank 04_bookshelf_management.frank
 do
