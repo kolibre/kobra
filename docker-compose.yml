@@ -4,6 +4,12 @@ services:
     image: postgres:11
     environment:
       - POSTGRES_PASSWORD=password
+  # mysql:
+  #   image: mysql:8.0
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=password
+  #     - MYSQL_DATABASE=kobra
+  #   command: ["--default-authentication-plugin=mysql_native_password"]
   nginx:
     image: nginx:1.17.5-alpine
     volumes:
@@ -17,28 +23,14 @@ services:
       - STORAGE_PATH=/srv/media
       - DATABASE_URL=postgres://postgres:password@postgres:5432/kobra
       - WAIT_FOR=tcp://postgres:5432
+  #     - DATABASE_URL=mysql2://root:password@mysql:3306/kobra?pool=5
+  #     - WAIT_FOR=tcp://mysql:3306
     volumes:
       - media:/srv/media
     ports:
       - 127.0.0.1:3000:3000
     depends_on:
       - postgres
-  # mysql:
-  #   image: mysql:8.0
-  #   environment:
-  #     - MYSQL_ROOT_PASSWORD=password
-  #     - MYSQL_DATABASE=kobra
-  #   command: ["--default-authentication-plugin=mysql_native_password"]
-  # kobra:
-  #   build: .
-  #   environment:
-  #     - SECRET_KEY=yourOwnSecretKey
-  #     - DATABASE_URL=mysql2://root:password@mysql:3306/kobra?pool=5
-  #     - WAIT_FOR=tcp://mysql:3306
-  #   ports:
-  #     - 127.0.0.1:3000:3000
-  #   depends_on:
-  #     - mysql
 
 volumes:
   media:
