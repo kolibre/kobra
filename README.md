@@ -1,24 +1,35 @@
-# README
+# Kobra
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+TODO: Describe what kobra is
 
-Things you may want to cover:
+## API
 
-* Ruby version
+TODO: Describe the API.
 
-* System dependencies
+## Docker
 
-* Configuration
+This application is only targeted for running in docker and images are available at https://hub.docker.com/r/kolibreorg/kobra.
 
-* Database creation
+### Run
 
-* Database initialization
+Running the image requires setting the follwing environmemnt variables
 
-* How to run the test suite
+- SECRET_KEY
+  - A password to encrypt user password
+- STORAGE_PATH
+  - File path for storing uploaded files
+- DATABASE_URL
+  - How to connect to the database
+  - Supported database are SQLite3, Mysql and PostgreSQL
 
-* Services (job queues, cache servers, search engines, etc.)
+The provided docker-compose file illustrates an example how to run the application with a PostgresSQL datbase and a Nginx serving uploaded files. It's not recommended to use the example for production use.
 
-* Deployment instructions
+`docker-compose up -d`
 
-* ...
+### Build production image
+
+`docker build -t kobra .`
+
+### Build development image
+
+`docker build -t kobra:dev . -f Dockerfile.dev`
