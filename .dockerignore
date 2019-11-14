@@ -2,6 +2,12 @@
 .gitignore
 .dockerignore
 Dockerfile
+Dockerfile.dev
+README.md
+docker-compose.yml
 db/*.sqlite3
 config/database.yml
+run-api-tests.sh
+test
+testcases
 tmp/*
