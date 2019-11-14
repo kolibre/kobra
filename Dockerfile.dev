@@ -1,0 +1,15 @@
+FROM ruby:2.5.7
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
+RUN gem install bundler
+
+ENV BUNDLER_VERSION 2.0.2
+COPY Gemfile /usr/src/app/
+COPY Gemfile.lock /usr/src/app/
+RUN bundle install
+
+COPY . /usr/src/app/
+COPY config/database.yml /usr/src/app/config/
+CMD /bin/bash
