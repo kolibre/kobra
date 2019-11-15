@@ -83,19 +83,6 @@ jobs:
       - run:
           name: Run test cases
           command: ./run-api-tests.sh # builds the docker image and runs tests
-  build-and-publish-docker-image:
-    docker:
-      - image: circleci/buildpack-deps:bionic-curl
-    steps:
-      - checkout
-      - setup_remote_docker:
-          version: 18.06.0-ce
-      - run:
-          name: Build docker image
-          command: docker build -t kolibreorg/kobra:latest .
-      - run:
-          name: Push image to dockerhub
-          command: echo "docker push kolibreorg/kobra:latest" # TODO: integrate with dockerhub
 
 workflows:
   version: 2.1
@@ -109,6 +96,3 @@ workflows:
             - test-migrations-postgres
             - test-migrations-mysql
             - test-migrations-sqlite
-      - build-and-publish-docker-image:
-          requires:
-            - run-api-tests
