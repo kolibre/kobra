@@ -42,7 +42,7 @@ class UserContentsController < ApplicationController
         @user_contents.push(@user_content)
       end
     end
-    render json: @user_contents
+    render :json => @user_contents, :status => :created
   end
 
   # POST /user_contents/remove - remove content from one or many users

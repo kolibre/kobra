@@ -169,7 +169,7 @@ header["Content-Type"] = "application/json"
 json.content_id=2
 json.users=[1,2]
 Response
-must(status==200) // TODO: change to 201
+must(status==201)
 j = JSON.parse(body)
 must(j.length==2)
 
@@ -178,7 +178,7 @@ header["Accept"] = "application/json"
 header["Content-Type"] = "application/json"
 json.content_id=3
 Response
-must(status==200) // TODO: change to 201
+must(status==201)
 j = JSON.parse(body)
 must(j.length==3)
 
@@ -220,7 +220,7 @@ json.content_id=1
 json.users=[1,2]
 json.return=true
 Response
-must(status==200) // TODO: change to 201
+must(status==201)
 j = JSON.parse(body)
 must(j.length==2)
 must(j[0].return==true)
@@ -231,7 +231,7 @@ header["Accept"] = "application/json"
 header["Content-Type"] = "application/json"
 json.content_id=1
 Response
-must(status==200) // TODO: change to 201
+must(status==201)
 j = JSON.parse(body)
 //must(j.length==1) // TODO: don't include nill entries
 //must(j[0].return==false)
