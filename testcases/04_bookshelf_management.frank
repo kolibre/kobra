@@ -235,3 +235,12 @@ must(status==201)
 j = JSON.parse(body)
 must(j.length==1)
 must(j[0].return==false)
+
+POST /user_contents/add
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_id=1
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.length==0)
