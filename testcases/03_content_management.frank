@@ -110,7 +110,7 @@ header["Accept"] = "application/json"
 Response
 must(status==200)
 j = JSON.parse(body)
-must(j.contents.id==1) // TODO: change to content
+must(j.content.id==1)
 must(j.content_metadata.length==2)
 must(j.content_audios.length==0)
 must(j.content_resources.length==0)

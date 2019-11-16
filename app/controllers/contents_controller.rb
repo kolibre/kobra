@@ -11,7 +11,7 @@ class ContentsController < ApplicationController
   # GET /contents/1
   def show
     render json: {
-      contents: @content,
+      content: @content,
       content_metadata: @content_metadata,
       content_audios: @content_audios,
       content_resources: @content_resources
