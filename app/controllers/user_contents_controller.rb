@@ -33,13 +33,17 @@ class UserContentsController < ApplicationController
       @users = User.all
       @users.each do |user|
         @user_content = UserContent.create(user_id: user.id, content_id: @content.id, return: must_return)
-        @user_contents.push(@user_content)
+        unless @user_content.id.nil?
+          @user_contents.push(@user_content)
+        end
       end
     else
       @users = User.where(id: params[:users])
       @users.each do |user|
         @user_content = UserContent.create(user_id: user.id, content_id: @content.id, return: must_return)
-        @user_contents.push(@user_content)
+        unless @user_content.id.nil?
+          @user_contents.push(@user_content)
+        end
       end
     end
     render :json => @user_contents, :status => :created
