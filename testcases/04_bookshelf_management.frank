@@ -135,7 +135,7 @@ Response
 must(status==200)
 j = JSON.parse(body)
 must(j.content_list_id==3)
-//must(j.content_list_v1_id==1) // TODO: support updating
+must(j.content_list_v1_id==1)
 must(j.return==true)
 
 GET /user_contents
