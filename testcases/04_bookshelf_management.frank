@@ -117,12 +117,10 @@ header["Accept"] = "application/json"
 header["Content-Type"] = "application/json"
 json.state_id=2
 json.returned=true
-json.returned_at="1970-01-01 00:00:00"
 Response
 must(status==200)
 j = JSON.parse(body)
 must(j.returned==false)
-must(j.return_at==null)
 must(j.state_id==1)
 
 PUT /user_contents/1
@@ -156,15 +154,41 @@ must(status==422)
 PUT /user_contents/1
 header["Accept"] = "application/json"
 header["Content-Type"] = "application/json"
+json.return=true
+Response
+must(status==422)
+
+PUT /user_contents/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.return=true
+json.return_at='1970-01-01 00:00:00'
+Response
+must(status==422)
+
+PUT /user_contents/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.return=true
+json.return_at='2121-01-01 00:00:00'
+Response
+must(status==200)
+j = JSON.parse(body)
+must(j.return==true)
+must(j.return_at=='2121-01-01T00:00:00.000Z')
+
+PUT /user_contents/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
 json.content_list_id=3
 json.content_list_v1_id=1
-json.return=true
+json.return=false
 Response
 must(status==200)
 j = JSON.parse(body)
 must(j.content_list_id==3)
 must(j.content_list_v1_id==1)
-must(j.return==true)
+must(j.return==false)
 
 GET /user_contents
 header["Accept"] = "application/json"
@@ -248,11 +272,25 @@ json.content_id=1
 json.users=[1,2]
 json.return=true
 Response
+must(status==200)
+j = JSON.parse(body)
+must(j.length==0)
+
+POST /user_contents/add
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_id=1
+json.users=[1,2]
+json.return=true
+json.return_at='2121-01-01 00:00:00'
+Response
 must(status==201)
 j = JSON.parse(body)
 must(j.length==2)
 must(j[0].return==true)
+must(j[0].return_at=='2121-01-01T00:00:00.000Z')
 must(j[1].return==true)
+must(j[1].return_at=='2121-01-01T00:00:00.000Z')
 
 POST /user_contents/add
 header["Accept"] = "application/json"

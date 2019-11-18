@@ -28,11 +28,12 @@ class UserContentsController < ApplicationController
   # POST /user_contents/add - add content to one or many users
   def add
     must_return = params.has_key?("return") ? params[:return] : false
+    return_at = params.has_key?("return_at") ? params[:return_at] : nil
     @user_contents = []
     if params[:users].nil?
       @users = User.all
       @users.each do |user|
-        @user_content = UserContent.create(user_id: user.id, content_id: @content.id, return: must_return)
+        @user_content = UserContent.create(user_id: user.id, content_id: @content.id, return: must_return, return_at: return_at)
         unless @user_content.id.nil?
           @user_contents.push(@user_content)
         end
@@ -40,7 +41,7 @@ class UserContentsController < ApplicationController
     else
       @users = User.where(id: params[:users])
       @users.each do |user|
-        @user_content = UserContent.create(user_id: user.id, content_id: @content.id, return: must_return)
+        @user_content = UserContent.create(user_id: user.id, content_id: @content.id, return: must_return, return_at: return_at)
         unless @user_content.id.nil?
           @user_contents.push(@user_content)
         end
