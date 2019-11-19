@@ -10,7 +10,7 @@ class ResourceUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "#{ENV['STORAGE_PATH']}/#{model.content.id}/resources/#{model.id}"
+    "#{ENV['STORAGE_PATH']}/#{model.content.id}/resources"
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
