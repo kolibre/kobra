@@ -15,11 +15,27 @@ class ContentResourcesController < ApplicationController
 
   # POST /content_resources
   def create
-    @content = Content.find(params[:content_id])
-    @content_resource = @content.content_resources.build(content_resource_params)
+    @content_resource = ContentResource.new(content_resource_params)
 
     if @content_resource.save
-      render json: @content_resource, status: :created, location: @content
+      render json: @content_resource, status: :created, location: @content_resource
+    else
+      render json: @content_resource.errors, status: :unprocessable_entity
+    end
+  end
+
+  # POST /contents/1/resource
+  def upload
+    content_id = params[:id]
+    file_name = params.has_key?("file_name") ? params[:file_name] : nil
+    bytes = params.has_key?("bytes") ? params[:bytes] : nil
+    mime_type = params.has_key?("mime_type") ? params[:mime_type] : nil
+    resource = params.has_key?("resource") ? params[:resource] : nil
+
+    @content_resource = ContentResource.new(content_id: content_id, file_name: file_name, bytes: bytes, resource: resource)
+
+    if @content_resource.save
+      render json: @content_resource, status: :created, location: @content_resource
     else
       render json: @content_resource.errors, status: :unprocessable_entity
     end

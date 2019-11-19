@@ -95,8 +95,44 @@ must(j.id==2)
 must(j.key=="foo")
 must(j.value=="bar")
 
-// TODO: add content content audio
-// TODO: add content resources
+POST /contents/1/audio
+header["Accept"] = "application/json"
+header["Content-Type"] = "multipart/form-data; boundary=" + boundary
+form.size = 321
+form.length = 123
+form.audio = "@./testcases/audio.ogg"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==1)
+must(j.content_id==1)
+must(j.size==321)
+must(j.length==123)
+//must(j.audio!=nil) // TODO: check
+
+// TODO: ensure that only one file can be uploaded
+// TODO: ensure that file can't be updated
+// TODO: ensure that file can be destroyed
+
+POST /contents/1/resource
+header["Accept"] = "application/json"
+header["Content-Type"] = "multipart/form-data; boundary=" + boundary
+form.file_name = 'resource.mp3'
+form.bytes = 1234
+form.mime_type = 'application/octet-stream'
+form.resource = "@./testcases/resource.mp3"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.content_id==1)
+must(j.file_name=='resource.mp3')
+must(j.bytes==1234)
+//pplication/octet-stream') // TODO: fix
+//must(j.resource!=nil) // TODO: check
+
+// TODO: ensure that only one file can be uploaded
+// TODO: ensure that file can't be updated
+// TODO: ensure that file can be destroyed
 
 GET /contents
 header["Accept"] = "application/json"
@@ -112,8 +148,8 @@ must(status==200)
 j = JSON.parse(body)
 must(j.content.id==1)
 must(j.content_metadata.length==2)
-must(j.content_audios.length==0)
-must(j.content_resources.length==0)
+must(j.content_audios.length==1) // TODO: add more checks
+must(j.content_resources.length==1) // TODO: add more checks
 
 DELETE /contents/1
 header["Accept"] = "application/json"

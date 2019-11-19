@@ -15,11 +15,26 @@ class ContentAudiosController < ApplicationController
 
   # POST /content_audios
   def create
-    @content = Content.find(params[:content_id])
-    @content_audio = @content.content_audios.build(content_audio_params)
+    @content_audio = ContentAudio.new(content_audio_params)
 
     if @content_audio.save
-      render json: @content_audio, status: :created, location: @content
+      render json: @content_audio, status: :created, location: @content_audio
+    else
+      render json: @content_audio.errors, status: :unprocessable_entity
+    end
+  end
+
+  # POST /contents/1/audio
+  def upload
+    content_id = params[:id]
+    size = params.has_key?("size") ? params[:size] : nil
+    length = params.has_key?("length") ? params[:length] : nil
+    audio = params.has_key?("audio") ? params[:audio] : nil
+
+    @content_audio = ContentAudio.new(content_id: content_id, size: size, length: length, audio: audio)
+
+    if @content_audio.save
+      render json: @content_audio, status: :created, location: @content_audio
     else
       render json: @content_audio.errors, status: :unprocessable_entity
     end
