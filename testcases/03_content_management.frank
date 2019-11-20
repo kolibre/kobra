@@ -64,6 +64,30 @@ must(status==422)
 POST /content_metadata
 header["Accept"] = "application/json"
 header["Content-Type"] = "application/json"
+json.key="foo"
+json.value="bar"
+Response
+must(status==422)
+
+POST /content_metadata
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_id=1
+json.key="foo"
+Response
+must(status==422)
+
+POST /content_metadata
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.content_id=1
+json.value="bar"
+Response
+must(status==422)
+
+POST /content_metadata
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
 json.content_id=1
 json.key="foo"
 json.value="bar"
