@@ -4,6 +4,7 @@ class CreateContentAudios < ActiveRecord::Migration[5.2]
       t.references :content, foreign_key: true
       t.integer :size, null: false
       t.integer :length, null: false
+      t.text :mime_type, null: false
 
       t.timestamps
     end

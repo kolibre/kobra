@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2019_11_20_045444) do
     t.integer "content_id"
     t.integer "size", null: false
     t.integer "length", null: false
+    t.text "mime_type", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "audio", null: false
