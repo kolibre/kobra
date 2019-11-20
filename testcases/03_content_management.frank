@@ -157,7 +157,7 @@ must(j.id==1)
 must(j.content_id==1)
 must(j.file_name=='resource.mp3')
 must(j.bytes==1234)
-//must(j.mime_type='application/octet-stream') // TODO: fix
+must(j.mime_type=='application/octet-stream')
 must(j.resource.url=='/tmp/1/resources/resource.mp3')
 
 POST /contents/1/resource
@@ -191,7 +191,7 @@ must(j.id==2)
 must(j.content_id==1)
 must(j.file_name=='resource.txt')
 must(j.bytes==1234)
-//must(j.mime_type='text/plain') // TODO: fix
+must(j.mime_type=='text/plain')
 must(j.resource.url=='/tmp/1/resources/resource.txt')
 
 // TODO: ensure that file can be destroyed

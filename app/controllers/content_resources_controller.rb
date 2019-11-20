@@ -32,7 +32,7 @@ class ContentResourcesController < ApplicationController
     mime_type = params.has_key?("mime_type") ? params[:mime_type] : nil
     resource = params.has_key?("resource") ? params[:resource] : nil
 
-    @content_resource = ContentResource.new(content_id: content_id, file_name: file_name, bytes: bytes, resource: resource)
+    @content_resource = ContentResource.new(content_id: content_id, file_name: file_name, bytes: bytes, mime_type: mime_type, resource: resource)
 
     if @content_resource.save
       render json: @content_resource, status: :created, location: @content_resource
