@@ -1,5 +1,5 @@
 class ContentAudio < ApplicationRecord
   belongs_to :content
   mount_uploader :audio, AudioUploader
-  validates_presence_of :audio
+  validates_presence_of :size, :length, :audio
 end
