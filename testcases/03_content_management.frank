@@ -108,7 +108,7 @@ must(j.id==1)
 must(j.content_id==1)
 must(j.size==321)
 must(j.length==123)
-//must(j.audio!=nil) // TODO: check
+must(j.audio.url=='/tmp/1/audios/audio.ogg')
 
 POST /contents/1/audio
 header["Accept"] = "application/json"
@@ -119,8 +119,28 @@ form.audio = "@./testcases/audio.ogg"
 Response
 must(status==500)
 
-// TODO: ensure that only one file can be uploaded
-// TODO: ensure that file can't be updated
+PUT /content_audios/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.size = 123
+Response
+must(status==404)
+
+POST /contents/1/audio
+header["Accept"] = "application/json"
+header["Content-Type"] = "multipart/form-data; boundary=" + boundary
+form.size = 321
+form.length = 123
+form.audio = "@./testcases/audio.mp3"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==2)
+must(j.content_id==1)
+must(j.size==321)
+must(j.length==123)
+must(j.audio.url=='/tmp/1/audios/audio.mp3')
+
 // TODO: ensure that file can be destroyed
 
 POST /contents/1/resource
@@ -133,11 +153,12 @@ form.resource = "@./testcases/resource.mp3"
 Response
 must(status==201)
 j = JSON.parse(body)
+must(j.id==1)
 must(j.content_id==1)
 must(j.file_name=='resource.mp3')
 must(j.bytes==1234)
-//pplication/octet-stream') // TODO: fix
-//must(j.resource!=nil) // TODO: check
+//must(j.mime_type='application/octet-stream') // TODO: fix
+must(j.resource.url=='/tmp/1/resources/resource.mp3')
 
 POST /contents/1/resource
 header["Accept"] = "application/json"
@@ -149,8 +170,30 @@ form.resource = "@./testcases/resource.mp3"
 Response
 must(status==500)
 
-// TODO: ensure that only one file can be uploaded
-// TODO: ensure that file can't be updated
+PUT /content_resouces/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+json.bytes = 4321
+Response
+must(status==404)
+
+POST /contents/1/resource
+header["Accept"] = "application/json"
+header["Content-Type"] = "multipart/form-data; boundary=" + boundary
+form.file_name = 'resource.txt'
+form.bytes = 1234
+form.mime_type = 'text/plain'
+form.resource = "@./testcases/resource.txt"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==2)
+must(j.content_id==1)
+must(j.file_name=='resource.txt')
+must(j.bytes==1234)
+//must(j.mime_type='text/plain') // TODO: fix
+must(j.resource.url=='/tmp/1/resources/resource.txt')
+
 // TODO: ensure that file can be destroyed
 
 GET /contents
@@ -167,8 +210,8 @@ must(status==200)
 j = JSON.parse(body)
 must(j.content.id==1)
 must(j.content_metadata.length==2)
-must(j.content_audios.length==1) // TODO: add more checks
-must(j.content_resources.length==1) // TODO: add more checks
+must(j.content_audios.length==2) // TODO: add more checks
+must(j.content_resources.length==2) // TODO: add more checks
 
 DELETE /contents/1
 header["Accept"] = "application/json"
