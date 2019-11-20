@@ -29,9 +29,10 @@ class ContentAudiosController < ApplicationController
     content_id = params[:id]
     size = params.has_key?("size") ? params[:size] : nil
     length = params.has_key?("length") ? params[:length] : nil
+    mime_type = params.has_key?("mime_type") ? params[:mime_type] : nil
     audio = params.has_key?("audio") ? params[:audio] : nil
 
-    @content_audio = ContentAudio.new(content_id: content_id, size: size, length: length, audio: audio)
+    @content_audio = ContentAudio.new(content_id: content_id, size: size, length: length, mime_type: mime_type, audio: audio)
 
     if @content_audio.save
       render json: @content_audio, status: :created, location: @content_audio
@@ -62,6 +63,6 @@ class ContentAudiosController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def content_audio_params
-      params.require(:content_audio).permit(:content_id, :size, :length, :audio)
+      params.require(:content_audio).permit(:content_id, :size, :length, :mime_type, :audio)
     end
 end

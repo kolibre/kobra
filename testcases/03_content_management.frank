@@ -123,6 +123,7 @@ POST /contents/1/audio
 header["Accept"] = "application/json"
 header["Content-Type"] = "multipart/form-data; boundary=" + boundary
 form.length = 123
+form.mime_type = 'audio/ogg'
 form.audio = "@./testcases/audio.ogg"
 Response
 must(status==422)
@@ -131,6 +132,7 @@ POST /contents/1/audio
 header["Accept"] = "application/json"
 header["Content-Type"] = "multipart/form-data; boundary=" + boundary
 form.size = 321
+form.mime_type = 'audio/ogg'
 form.audio = "@./testcases/audio.ogg"
 Response
 must(status==422)
@@ -140,6 +142,7 @@ header["Accept"] = "application/json"
 header["Content-Type"] = "multipart/form-data; boundary=" + boundary
 form.size = 321
 form.length = 123
+form.audio = "@./testcases/audio.ogg"
 Response
 must(status==422)
 
@@ -148,6 +151,16 @@ header["Accept"] = "application/json"
 header["Content-Type"] = "multipart/form-data; boundary=" + boundary
 form.size = 321
 form.length = 123
+form.mime_type = 'audio/ogg'
+Response
+must(status==422)
+
+POST /contents/1/audio
+header["Accept"] = "application/json"
+header["Content-Type"] = "multipart/form-data; boundary=" + boundary
+form.size = 321
+form.length = 123
+form.mime_type = 'audio/ogg'
 form.audio = "@./testcases/audio.ogg"
 Response
 must(status==201)
@@ -156,6 +169,7 @@ must(j.id==1)
 must(j.content_id==1)
 must(j.size==321)
 must(j.length==123)
+must(j.mime_type=='audio/ogg')
 must(j.audio.url=='/tmp/1/audios/audio.ogg')
 
 POST /contents/1/audio
@@ -163,6 +177,7 @@ header["Accept"] = "application/json"
 header["Content-Type"] = "multipart/form-data; boundary=" + boundary
 form.size = 321
 form.length = 123
+form.mime_type = 'audio/ogg'
 form.audio = "@./testcases/audio.ogg"
 Response
 must(status==500)
@@ -179,6 +194,7 @@ header["Accept"] = "application/json"
 header["Content-Type"] = "multipart/form-data; boundary=" + boundary
 form.size = 321
 form.length = 123
+form.mime_type = 'audio/mpeg'
 form.audio = "@./testcases/audio.mp3"
 Response
 must(status==201)
@@ -187,6 +203,7 @@ must(j.id==2)
 must(j.content_id==1)
 must(j.size==321)
 must(j.length==123)
+must(j.mime_type=='audio/mpeg')
 must(j.audio.url=='/tmp/1/audios/audio.mp3')
 
 // TODO: ensure that file can be destroyed
