@@ -212,7 +212,7 @@ POST /contents/1/resource
 header["Accept"] = "application/json"
 header["Content-Type"] = "multipart/form-data; boundary=" + boundary
 form.bytes = 1234
-form.mime_type = 'application/octet-stream'
+form.mime_type = 'audio/mpeg'
 form.resource = "@./testcases/resource.mp3"
 Response
 must(status==422)
@@ -221,16 +221,7 @@ POST /contents/1/resource
 header["Accept"] = "application/json"
 header["Content-Type"] = "multipart/form-data; boundary=" + boundary
 form.file_name = 'resource.mp3'
-form.mime_type = 'application/octet-stream'
-form.resource = "@./testcases/resource.mp3"
-Response
-must(status==422)
-
-POST /contents/1/resource
-header["Accept"] = "application/json"
-header["Content-Type"] = "multipart/form-data; boundary=" + boundary
-form.file_name = 'resource.mp3'
-form.bytes = 1234
+form.mime_type = 'audio/mpeg'
 form.resource = "@./testcases/resource.mp3"
 Response
 must(status==422)
@@ -240,7 +231,7 @@ header["Accept"] = "application/json"
 header["Content-Type"] = "multipart/form-data; boundary=" + boundary
 form.file_name = 'resource.mp3'
 form.bytes = 1234
-form.mime_type = 'application/octet-stream'
+form.resource = "@./testcases/resource.mp3"
 Response
 must(status==422)
 
@@ -249,7 +240,16 @@ header["Accept"] = "application/json"
 header["Content-Type"] = "multipart/form-data; boundary=" + boundary
 form.file_name = 'resource.mp3'
 form.bytes = 1234
-form.mime_type = 'application/octet-stream'
+form.mime_type = 'audio/mpeg'
+Response
+must(status==422)
+
+POST /contents/1/resource
+header["Accept"] = "application/json"
+header["Content-Type"] = "multipart/form-data; boundary=" + boundary
+form.file_name = 'resource.mp3'
+form.bytes = 1234
+form.mime_type = 'audio/mpeg'
 form.resource = "@./testcases/resource.mp3"
 Response
 must(status==201)
@@ -258,7 +258,7 @@ must(j.id==1)
 must(j.content_id==1)
 must(j.file_name=='resource.mp3')
 must(j.bytes==1234)
-must(j.mime_type=='application/octet-stream')
+must(j.mime_type=='audio/mpeg')
 must(j.resource.url=='/tmp/1/resources/resource.mp3')
 
 POST /contents/1/resource
@@ -266,7 +266,7 @@ header["Accept"] = "application/json"
 header["Content-Type"] = "multipart/form-data; boundary=" + boundary
 form.file_name = 'resource.mp3'
 form.bytes = 1234
-form.mime_type = 'application/octet-stream'
+form.mime_type = 'audio/mpeg'
 form.resource = "@./testcases/resource.mp3"
 Response
 must(status==500)
