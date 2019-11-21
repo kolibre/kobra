@@ -4,6 +4,8 @@ class CreateQuestionAudios < ActiveRecord::Migration[5.2]
       t.references :question_text, foreign_key: true
       t.integer :size, null: false
       t.integer :length, null: false
+      t.text :mime_type, null: false
+      t.text :audio, null: false
 
       t.timestamps
     end

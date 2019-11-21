@@ -46,6 +46,6 @@ class QuestionAudiosController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def question_audio_params
-      params.require(:question_audio).permit(:question_text_id, :size, :length)
+      params.require(:question_audio).permit(:question_text_id, :size, :length, :mime_type, :audio)
     end
 end
