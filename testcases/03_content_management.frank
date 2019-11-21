@@ -192,8 +192,8 @@ must(status==404)
 POST /contents/1/audio
 header["Accept"] = "application/json"
 header["Content-Type"] = "multipart/form-data; boundary=" + boundary
-form.size = 321
-form.length = 123
+form.size = 123
+form.length = 321
 form.mime_type = 'audio/mpeg'
 form.audio = "@./testcases/audio.mp3"
 Response
@@ -201,8 +201,8 @@ must(status==201)
 j = JSON.parse(body)
 must(j.id==2)
 must(j.content_id==1)
-must(j.size==321)
-must(j.length==123)
+must(j.size==123)
+must(j.length==321)
 must(j.mime_type=='audio/mpeg')
 must(j.audio.url=='/tmp/1/audios/audio.mp3')
 
@@ -271,7 +271,7 @@ form.resource = "@./testcases/resource.mp3"
 Response
 must(status==500)
 
-PUT /content_resouces/1
+PUT /content_resources/1
 header["Accept"] = "application/json"
 header["Content-Type"] = "application/json"
 json.bytes = 4321
@@ -282,7 +282,7 @@ POST /contents/1/resource
 header["Accept"] = "application/json"
 header["Content-Type"] = "multipart/form-data; boundary=" + boundary
 form.file_name = 'resource.txt'
-form.bytes = 1234
+form.bytes = 4321
 form.mime_type = 'text/plain'
 form.resource = "@./testcases/resource.txt"
 Response
@@ -291,7 +291,7 @@ j = JSON.parse(body)
 must(j.id==2)
 must(j.content_id==1)
 must(j.file_name=='resource.txt')
-must(j.bytes==1234)
+must(j.bytes==4321)
 must(j.mime_type=='text/plain')
 must(j.resource.url=='/tmp/1/resources/resource.txt')
 
@@ -311,8 +311,20 @@ must(status==200)
 j = JSON.parse(body)
 must(j.content.id==1)
 must(j.content_metadata.length==2)
-must(j.content_audios.length==2) // TODO: add more checks
-must(j.content_resources.length==2) // TODO: add more checks
+must(j.content_metadata[0].key=="foo")
+must(j.content_metadata[0].value=="bar")
+must(j.content_metadata[1].key=="foo")
+must(j.content_metadata[1].value=="bar")
+must(j.content_audios.length==2)
+must(j.content_audios[0].mime_type=='audio/mpeg')
+must(j.content_audios[0].size==123)
+must(j.content_audios[1].mime_type=='audio/ogg')
+must(j.content_audios[1].size==321)
+must(j.content_resources.length==2)
+must(j.content_resources[0].file_name=='resource.mp3')
+must(j.content_resources[0].bytes=='1234')
+must(j.content_resources[1].file_name=='resource.txt')
+must(j.content_resources[1].bytes=='4321')
 
 DELETE /contents/1
 header["Accept"] = "application/json"
