@@ -206,7 +206,28 @@ must(j.length==321)
 must(j.mime_type=='audio/mpeg')
 must(j.audio.url=='/tmp/1/audios/audio.mp3')
 
-// TODO: ensure that file can be destroyed
+DELETE /content_audios/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+must(status==204)
+
+POST /contents/1/audio
+header["Accept"] = "application/json"
+header["Content-Type"] = "multipart/form-data; boundary=" + boundary
+form.size = 321
+form.length = 123
+form.mime_type = 'audio/ogg'
+form.audio = "@./testcases/audio.ogg"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==3)
+must(j.content_id==1)
+must(j.size==321)
+must(j.length==123)
+must(j.mime_type=='audio/ogg')
+must(j.audio.url=='/tmp/1/audios/audio.ogg')
 
 POST /contents/1/resource
 header["Accept"] = "application/json"
@@ -295,7 +316,28 @@ must(j.bytes==4321)
 must(j.mime_type=='text/plain')
 must(j.resource.url=='/tmp/1/resources/resource.txt')
 
-// TODO: ensure that file can be destroyed
+DELETE /content_resources/1
+header["Accept"] = "application/json"
+header["Content-Type"] = "application/json"
+Response
+must(status==204)
+
+POST /contents/1/resource
+header["Accept"] = "application/json"
+header["Content-Type"] = "multipart/form-data; boundary=" + boundary
+form.file_name = 'resource.mp3'
+form.bytes = 1234
+form.mime_type = 'audio/mpeg'
+form.resource = "@./testcases/resource.mp3"
+Response
+must(status==201)
+j = JSON.parse(body)
+must(j.id==3)
+must(j.content_id==1)
+must(j.file_name=='resource.mp3')
+must(j.bytes==1234)
+must(j.mime_type=='audio/mpeg')
+must(j.resource.url=='/tmp/1/resources/resource.mp3')
 
 GET /contents
 header["Accept"] = "application/json"
