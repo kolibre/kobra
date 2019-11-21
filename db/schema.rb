@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 2019_11_20_045444) do
     t.integer "announcement_text_id"
     t.integer "size", null: false
     t.integer "length", null: false
+    t.text "mime_type", null: false
+    t.text "audio", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["announcement_text_id"], name: "index_announcement_audios_on_announcement_text_id"
@@ -34,8 +36,6 @@ ActiveRecord::Schema.define(version: 2019_11_20_045444) do
   create_table "announcements", force: :cascade do |t|
     t.text "category"
     t.text "priority", null: false
-    t.text "mime_type", null: false
-    t.text "audio", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
