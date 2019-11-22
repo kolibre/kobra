@@ -204,7 +204,8 @@ ActiveRecord::Schema.define(version: 2019_11_20_045444) do
     t.index ["content_list_id"], name: "index_user_contents_on_content_list_id"
     t.index ["content_list_v1_id"], name: "index_user_contents_on_content_list_v1_id"
     t.index ["state_id"], name: "index_user_contents_on_state_id"
-    t.index ["user_id", "content_id"], name: "index_user_contents_on_user_id_and_content_id", unique: true
+    t.index ["user_id", "content_id", "content_list_id"], name: "index_user_contents_on_user_id_content_id_content_list_id", unique: true
+    t.index ["user_id", "content_id", "content_list_v1_id"], name: "index_user_contents_on_user_id_content_id_content_list_v1_id", unique: true
     t.index ["user_id"], name: "index_user_contents_on_user_id"
   end
 
