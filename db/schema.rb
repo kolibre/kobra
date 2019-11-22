@@ -193,7 +193,7 @@ ActiveRecord::Schema.define(version: 2019_11_20_045444) do
     t.integer "user_id"
     t.integer "content_id"
     t.integer "content_list_id", default: 1
-    t.integer "content_list_v1_id", default: 3
+    t.integer "content_list_v1_id", default: 2
     t.boolean "return", default: false, null: false
     t.boolean "returned", default: false, null: false
     t.datetime "return_at"

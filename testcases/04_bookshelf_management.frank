@@ -98,7 +98,7 @@ must(j.id==1)
 must(j.content_id==1)
 must(j.user_id==1)
 must(j.content_list_id==1)
-must(j.content_list_v1_id==3)
+must(j.content_list_v1_id==2)
 must(j.return==false)
 must(j.returned==false)
 must(j.return_at==null)
@@ -180,13 +180,13 @@ must(j.return_at=='2121-01-01T00:00:00.000Z')
 PUT /user_contents/1
 header["Accept"] = "application/json"
 header["Content-Type"] = "application/json"
-json.content_list_id=3
+json.content_list_id=2
 json.content_list_v1_id=1
 json.return=false
 Response
 must(status==200)
 j = JSON.parse(body)
-must(j.content_list_id==3)
+must(j.content_list_id==2)
 must(j.content_list_v1_id==1)
 must(j.return==false)
 
