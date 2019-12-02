@@ -47,6 +47,12 @@ Endpoints to add/update users and show status.
 
 Add a new user.
 
+Parameters:
+
+- *username* [string] (required) unique username for accessing the daisy online service
+- *password* [string] (optional, a random password is generated if missing) the password is encrypted with the SECRET_KEY and stored encrypted in the database.
+- *log* [boolean] (optional, default false) log requests/responses from the user to database
+
 #### GET /users/<id>
 
 Returns info about the user as well as it's current bookshelf.
@@ -59,21 +65,51 @@ Endpoint to add/delete content. Kobra does not provide any validation on content
 
 Add a new content.
 
+Parameters:
+
+- *category_id* [int] (required) category identifier
+- *daisy_format_id* [int] (required) daisy format identifier
+- *title* [string] (required) title of the daisy book
+
 #### DELETE /contents/<id>
 
 Delete a content and all its metadata, audios and resouces.
+
+#### GET /contents/<id>
+
+Returns the content and all its metadata, audios and resources
 
 #### POST /content_metadata
 
 Add metadata for a content.
 
+Parameters:
+
+- *content_id* [int] (required) content identifier
+- *key* [string] (required) metadata key
+- *value* [string] (required) metadata value
+
 #### POST /contents/<id>/audio
 
 Upload an audio file for a content.
 
+Parameters:
+
+- *size* [int] (required) number of bytes
+- *length* [int] (required) duration in milliseconds
+- *mime_type* [string] (required) audio mime type
+- *audio* [pointer] (required) path the to file
+
 #### POST /contents/<id>/resource
 
 Upload a resource for a content.
+
+Parameters:
+
+- *file_name* [string] (required) filename referenced in the daisy book
+- *bytes* [int] (required) number of bytes
+- *mime_type* [string] (required) file mime type
+- *resource* [pointer] (required) path to the file
 
 ### Bookshelf management
 
@@ -81,13 +117,34 @@ Upload a resource for a content.
 
 Add a content to a user's bookshelf.
 
+Parameters:
+
+- *content_id* [int] (required) content idenfifier
+- *user_id* [int] (required) user identifier
+- *content_list_id* [int] (optional, default 1 *bookshelf*) content list identifier, for protocol version 2, in which the content is to appear
+- *content_list_v1_id* [int] (optional, default 2 *new*) content list identifier, for protocol version 1, in which the content is to appear
+- *return* [bool] (optional, default false) the content must be return or not
+- *return_at* [string] (optional, default null) date, specified as 'YYYY-MM-DD HH:mm:ss', when the content is to be returned, required when return is set to true
+
 #### POST /user_contents/add
 
 Add a content to one more more users' bookshelf.
 
+- *content_id* [int] (required) content idenfifier
+- *user_id* [int]Array (optional) comma separated list of user identifiers, if not set the content is added to all users in the database
+- *content_list_id* [int] (optional, default 1 *bookshelf*) content list identifier, for protocol version 2, in which the content is to appear
+- *content_list_v1_id* [int] (optional, default 2 *new*) content list identifier, for protocol version 1, in which the content is to appear
+- *return* [bool] (optional, default false) the content must be return or not
+- *return_at* [string] (optional, default null) date, specified as 'YYYY-MM-DD HH:mm:ss', when the content is to be returned, required when return is set to true
+
 #### POST /user_contents/remove
 
 Remove a content from one more more users' bookshelf.
+
+Parameters:
+
+- *content_id* [int] (required) content idenfifier
+- *user_id* [int]Array (optional) comma separated list of user identifiers, if not set the content is removed from all users in the database
 
 ### Terms of service
 
@@ -111,7 +168,7 @@ This application is only targeted for running in docker and images are available
 
 ### Run
 
-Running the image requires setting the follwing environmemnt variables
+Running the image requires setting the following environment variables
 
 - SECRET_KEY (string)
   - A password to encrypt user password
