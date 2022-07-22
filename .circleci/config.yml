@@ -72,7 +72,7 @@ jobs:
           command: bundle exec rake db:migrate
   run-api-tests:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2204:2022.04.2
     steps:
       - checkout
       - run:
@@ -83,6 +83,22 @@ jobs:
       - run:
           name: Run test cases
           command: ./run-api-tests.sh # builds the docker image and runs tests
+  build-and-push:
+    docker:
+      - image: cimg/base:2022.07
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 20.10.14
+      - run:
+          name: Build application Docker image
+          command: |
+            docker build -t kolibreorg/kobra:latest .
+      - deploy:
+          name: Push application Docker image
+          command: |
+            docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+            docker push kolibreorg/kobra:latest
 
 workflows:
   version: 2.1
@@ -96,3 +112,10 @@ workflows:
             - test-migrations-postgres
             - test-migrations-mysql
             - test-migrations-sqlite
+      - build-and-push:
+          requires:
+            - run-api-tests
+          context: dockerhub
+          filters:
+            branches:
+              only: master
