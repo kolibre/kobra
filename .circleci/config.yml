@@ -72,7 +72,7 @@ jobs:
           command: bundle exec rake db:migrate
   run-api-tests:
     machine:
-      image: ubuntu-1604:201903-01
+      image: ubuntu-2204:2022.04.2
     steps:
       - checkout
       - run:
