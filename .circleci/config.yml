@@ -89,7 +89,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker:
-          version: 20.10.17
+          version: 20.10.14
       - run:
           name: Build application Docker image
           command: |
