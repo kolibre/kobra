@@ -52,4 +52,4 @@ gem 'hirb'
 # Use SysRandom to generate cryptographically secure passwords for users
 gem 'sysrandom'
 
-gem 'nokogiri', '~> 1.6.0'
+gem 'nokogiri', '~> 1.12.5'
