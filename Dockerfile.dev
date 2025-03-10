@@ -1,9 +1,11 @@
 FROM ruby:2.6.10
 
+ARG BUNDLER_VERSION=2.0.2
+
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-RUN gem install bundler
+RUN gem install bundler -v ${BUNDLER_VERSION}
 
 ENV BUNDLER_VERSION 2.0.2
 COPY Gemfile /usr/src/app/
