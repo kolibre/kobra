@@ -15,7 +15,7 @@ jobs:
       - checkout
       - run:
           name: Install bundler
-          command: gem install bundler
+          command: gem install bundler -v 2.0.2
       - run:
           name: Install Ruby dependencies
           command: bundle install
@@ -41,7 +41,7 @@ jobs:
       - checkout
       - run:
           name: Install bundler
-          command: gem install bundler
+          command: gem install bundler -v 2.0.2
       - run:
           name: Install Ruby dependencies
           command: bundle install
@@ -60,7 +60,7 @@ jobs:
       - checkout
       - run:
           name: Install bundler
-          command: gem install bundler
+          command: gem install bundler -v 2.0.2
       - run:
           name: Install Ruby dependencies
           command: bundle install
