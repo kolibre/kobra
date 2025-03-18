@@ -25,7 +25,7 @@ gem 'puma', '~> 4.3'
 # gem 'capistrano-rails', group: :development
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.1.0', require: false
+#gem 'bootsnap', '>= 1.1.0', require: false
 # Use Carrierwave for file uploads
 gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
 

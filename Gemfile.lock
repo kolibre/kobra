@@ -45,8 +45,6 @@ GEM
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     arel (9.0.0)
-    bootsnap (1.12.0)
-      msgpack (~> 1.2)
     builder (3.2.4)
     byebug (11.1.3)
     carrierwave (2.2.2)
@@ -82,10 +80,13 @@ GEM
     method_source (1.0.0)
     mini_magick (4.11.0)
     mini_mime (1.1.2)
+    mini_portile2 (2.8.8)
     minitest (5.17.0)
-    msgpack (1.5.4)
     mysql2 (0.5.4)
     nio4r (2.5.8)
+    nokogiri (1.13.10)
+      mini_portile2 (~> 2.8.0)
+      racc (~> 1.4)
     nokogiri (1.13.10-x86_64-linux)
       racc (~> 1.4)
     pg (1.4.1)
@@ -150,10 +151,10 @@ GEM
     websocket-extensions (0.1.5)
 
 PLATFORMS
+  ruby
   x86_64-linux
 
 DEPENDENCIES
-  bootsnap (>= 1.1.0)
   byebug
   carrierwave (>= 2.0.0.rc, < 3.0)
   hirb
