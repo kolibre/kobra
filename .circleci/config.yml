@@ -91,13 +91,11 @@ jobs:
       - setup_remote_docker:
           version: 20.10.14
       - run:
-          name: Build application Docker image
+          name: Build and push application Docker images
           command: |
-            docker build -t kolibreorg/kobra:latest .
-      - deploy:
-          name: Push application Docker image
-          command: |
+            docker build -t kolibreorg/kobra:${CIRCLE_SHA1:0:7} -t kolibreorg/kobra:latest .
             docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+            docker push kolibreorg/kobra:${CIRCLE_SHA1:0:7}
             docker push kolibreorg/kobra:latest
 
 workflows:
