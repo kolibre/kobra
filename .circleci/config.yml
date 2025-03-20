@@ -85,7 +85,7 @@ jobs:
           command: ./run-api-tests.sh # builds the docker image and runs tests
   build-and-push:
     docker:
-      - image: cimg/base:2022.07
+      - image: cimg/base:2024.11
     steps:
       - checkout
       - setup_remote_docker:
